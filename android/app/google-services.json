@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "561197505960",
+    "project_id": "hostel-management-ebe51",
+    "storage_bucket": "hostel-management-ebe51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561197505960:android:ddee58607e29752003d19d",
+        "android_client_info": {
+          "package_name": "com.example.code"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561197505960-fat6rpdc6g3t6ntcbksj8gg9l26i8pmt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXtNCObriviOH3KiKKe1gbn6YxQdtu6-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561197505960-fat6rpdc6g3t6ntcbksj8gg9l26i8pmt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

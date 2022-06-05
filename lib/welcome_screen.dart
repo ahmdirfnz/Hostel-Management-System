@@ -23,7 +23,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               textAlign: TextAlign.center,
               style: TextStyle(
               fontSize: 30.0,
-              fontWeight: FontWeight.bold),
+              fontWeight: FontWeight.bold,
+              fontFamily: 'playball'
+              ),
             ),
             SizedBox(height: 24.0,),
             TextButton(

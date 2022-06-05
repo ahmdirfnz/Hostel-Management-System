@@ -84,7 +84,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         showSpinner = false;
       });
     }, 
-    child: const Text('Sign Up'))
+    child: const Text('Sign Up', style: TextStyle(fontSize: 20.0),))
             ],
           ),
         ),

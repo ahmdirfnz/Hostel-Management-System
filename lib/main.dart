@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:code/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'welcome_screen.dart';
@@ -13,7 +16,9 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  // late StreamSubscription<User?> user;
   const MyApp({Key? key}) : super(key: key);
+
 
   // This widget is the root of your application.
   @override
@@ -25,7 +30,8 @@ class MyApp extends StatelessWidget {
         'welcome_screen': (context) => WelcomeScreen(),
         'signup_screen': (context) => RegistrationScreen(),
         'login_screen': (context) => LoginScreen(),
-        'home_screen': (context) => HomeScreen()
+        'home_screen': (context) => HomeScreen(),
+        'registration_screen': (context) => MyRegister()
       },
     );
   }

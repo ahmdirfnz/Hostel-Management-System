@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               title: const Text('Registration Form'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, 'registration_screen');
               },
             ),
             ListTile(

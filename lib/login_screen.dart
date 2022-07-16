@@ -87,7 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       showSpinner = false;
                     });
                   },
-                  child: Text('Log In', style: TextStyle(fontSize: 20.0),))
+                  child: Text('Log In', style: TextStyle(fontSize: 20.0),)
+              ),
+
             ],
           ),
         ),

@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
         'signup_screen': (context) => RegistrationScreen(),
         'login_screen': (context) => LoginScreen(),
         'home_screen': (context) => HomeScreen(),
-        'registration_screen': (context) => MyRegister()
+        'registration_screen': (context) => MyRegister(),
+        'room_booking': (context) => BookingRooom(),
       },
     );
   }

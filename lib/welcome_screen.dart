@@ -51,6 +51,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
                 )
             ),
+            SizedBox(
+              height: 24.0,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "home_screen");
+              },
+              child: const Text('Testing'),
+            ),
           ],
         ),
       ),

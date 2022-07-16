@@ -19,9 +19,6 @@ class _MyRegisterState extends State<MyRegister> {
         child: ListView(
           padding: EdgeInsets.all(10.0),
           children: <Widget>[
-            SizedBox(
-              height: 75.0,
-            ),
             const TextField(
               decoration: InputDecoration(
                   labelText: 'Full Name',
@@ -36,9 +33,7 @@ class _MyRegisterState extends State<MyRegister> {
                     borderSide: BorderSide(color: Colors.black, width: 2.0),
                   )),
             ),
-            SizedBox(
-              height: 15.0,
-            ),
+            SizedBox(height: 10.0,),
             const TextField(
               decoration: InputDecoration(
                   labelText: 'Username',
@@ -53,9 +48,7 @@ class _MyRegisterState extends State<MyRegister> {
                     borderSide: BorderSide(color: Colors.black, width: 2.0),
                   )),
             ),
-            SizedBox(
-              height: 15.0,
-            ),
+            SizedBox(height: 10.0,),
             TextFormField(
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
@@ -76,9 +69,7 @@ class _MyRegisterState extends State<MyRegister> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 15.0,
-            ),
+            SizedBox(height: 10.0,),
             TextFormField(
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
@@ -99,9 +90,7 @@ class _MyRegisterState extends State<MyRegister> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 15.0,
-            ),
+            SizedBox(height: 10.0,),
             TextFormField(
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
@@ -122,9 +111,7 @@ class _MyRegisterState extends State<MyRegister> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 15.0,
-            ),
+
             TextFormField(
               keyboardType: TextInputType.visiblePassword,
               decoration: const InputDecoration(
@@ -251,8 +238,103 @@ class _InfoPageState extends State<InfoPage> {
       appBar: AppBar(
         title: Text('Info Page'),
       ),
-      body: Center(
-          child: Text('Hii')),
+      body:  Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: const [
+              TextField(
+                decoration: InputDecoration(
+                    labelText: 'Username',
+                    prefixIcon: Icon(Icons.person),
+                    suffixIcon: Icon(
+                      Icons.delete_outline,
+                      color: Colors.red,
+                    ),
+                    hintText: "Enter Username",
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    )),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: 'Username',
+                    prefixIcon: Icon(Icons.person),
+                    suffixIcon: Icon(
+                      Icons.delete_outline,
+                      color: Colors.red,
+                    ),
+                    hintText: "Enter Username",
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    )),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: 'Username',
+                    prefixIcon: Icon(Icons.person),
+                    suffixIcon: Icon(
+                      Icons.delete_outline,
+                      color: Colors.red,
+                    ),
+                    hintText: "Enter Username",
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    )),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: 'Username',
+                    prefixIcon: Icon(Icons.person),
+                    suffixIcon: Icon(
+                      Icons.delete_outline,
+                      color: Colors.red,
+                    ),
+                    hintText: "Enter Username",
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    )),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: 'Username',
+                    prefixIcon: Icon(Icons.person),
+                    suffixIcon: Icon(
+                      Icons.delete_outline,
+                      color: Colors.red,
+                    ),
+                    hintText: "Enter Username",
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    )),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: 'Username',
+                    prefixIcon: Icon(Icons.person),
+                    suffixIcon: Icon(
+                      Icons.delete_outline,
+                      color: Colors.red,
+                    ),
+                    hintText: "Enter Username",
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    )),
+              ),
+            ],
+          )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => setState(() {
+          Navigator.pushNamed(context, 'info_screen');
+        }),
+        tooltip: 'Next Page',
+        child: const Icon(Icons.navigate_next),
+      ),
     );
   }
 }

@@ -22,35 +22,33 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               'Hostel Management',
               textAlign: TextAlign.center,
               style: TextStyle(
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'playball'
-              ),
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'playball'),
             ),
-            SizedBox(height: 24.0,),
+            SizedBox(
+              height: 24.0,
+            ),
             TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, 'login_screen');
-              },
-              child: const Text(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'login_screen');
+                },
+                child: const Text(
                   'Log In',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-              )
-            ),
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  ),
+                )),
             TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, 'signup_screen');
                 },
                 child: const Text(
-                    'Register',
+                  'Register',
                   style: TextStyle(
                     fontSize: 20.0,
                   ),
-
-                )
-            ),
+                )),
             SizedBox(
               height: 24.0,
             ),
@@ -58,7 +56,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               onPressed: () {
                 Navigator.pushNamed(context, "home_screen");
               },
-              child: const Text('Testing'),
+              child: const Text(
+                'Testing',
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
             ),
           ],
         ),

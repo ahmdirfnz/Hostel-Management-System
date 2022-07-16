@@ -150,7 +150,7 @@ class _MyRegisterState extends State<MyRegister> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => setState(() {
-          Navigator.pushNamed(context, 'room_booking');
+          Navigator.pushNamed(context, 'room_screen');
         }),
         tooltip: 'Next Page',
         child: const Icon(Icons.navigate_next),
@@ -159,21 +159,100 @@ class _MyRegisterState extends State<MyRegister> {
   }
 }
 
-class BookingRooom extends StatelessWidget {
+class BookingRoom extends StatefulWidget {
+  const BookingRoom({Key? key}) : super(key: key);
+
+  @override
+  _BookingRoomState createState() => _BookingRoomState();
+}
+
+class _BookingRoomState extends State<BookingRoom> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text('Registration Page'),
       ),
-      body: const Center(
-        child: Text(
-          'Booking Room Page',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          textAlign: TextAlign.center,
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                Card(
+                  child: SizedBox(
+                    width: 150,
+                    height: 150,
+                    child: Center(
+                      child: Text('Room A'),
+                    ),
+                  ),
+                ),
+                Card(
+                  child: SizedBox(
+                    width: 150,
+                    height: 150,
+                    child: Center(
+                      child: Text('Room C'),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                Card(
+                  child: SizedBox(
+                    width: 150,
+                    height: 150,
+                    child: Center(
+                      child: Text('Room B'),
+                    ),
+                  ),
+                ),
+                Card(
+                  child: SizedBox(
+                    width: 150,
+                    height: 150,
+                    child: Center(
+                      child: Text('Room D'),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => setState(() {
+          Navigator.pushNamed(context, 'info_screen');
+        }),
+        tooltip: 'Next Page',
+        child: const Icon(Icons.navigate_next),
+      ),
+    );
+  }
+}
+
+class InfoPage extends StatefulWidget {
+  const InfoPage({Key? key}) : super(key: key);
+
+  @override
+  _InfoPageState createState() => _InfoPageState();
+}
+
+class _InfoPageState extends State<InfoPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Info Page'),
+      ),
+      body: Center(
+          child: Text('Hii')),
     );
   }
 }

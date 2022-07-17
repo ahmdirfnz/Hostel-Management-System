@@ -12,6 +12,21 @@ class MyRegister extends StatefulWidget {
 
 class _MyRegisterState extends State<MyRegister> {
 
+  final fullNameController = TextEditingController();
+  final usernameController = TextEditingController();
+  final matricNumberController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  Future createUser(User user) async {
+
+    final docUser = FirebaseFirestore.instance.collection('student').doc();
+
+    final json = user.toJson();
+    await docUser.set(json);
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +49,7 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
+                  controller: fullNameController,
                   decoration: const InputDecoration(
                       labelText: 'Full Name',
                       prefixIcon: Icon(Icons.person),
@@ -51,7 +67,7 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
-
+                  controller: usernameController,
                   decoration: const InputDecoration(
                       labelText: 'Username',
                       prefixIcon: Icon(Icons.person),
@@ -69,7 +85,7 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-
+                controller: matricNumberController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     labelText: 'Matric Number',
@@ -93,7 +109,7 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-
+                  controller: phoneNumberController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     labelText: 'Mobile Number',
@@ -117,7 +133,7 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-
+                  controller: emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     labelText: 'Email',
@@ -141,7 +157,7 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-
+                  controller: passwordController,
                   keyboardType: TextInputType.visiblePassword,
                   decoration: const InputDecoration(
                     labelText: 'Password',
@@ -167,14 +183,53 @@ class _MyRegisterState extends State<MyRegister> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => setState(() {
-          Navigator.pushNamed(context, "room_screen");
-        }),
+        onPressed: () {
+          final user = User (
+            fullName: fullNameController.text,
+            userName: usernameController.text,
+            matricNumber: matricNumberController.text,
+            mobileNumber: int.parse(phoneNumberController.text),
+            email: emailController.text,
+            password: passwordController.text,
+      );
+          Navigator.pushNamed(context, 'booking_screen');
+          createUser(user);
+
+        },
         tooltip: 'Next Page',
         child: const Icon(Icons.navigate_next),
       ),
     );
   }
+}
+
+class User {
+  final String fullName;
+  final String userName;
+  final String matricNumber;
+  final int mobileNumber;
+  final String email;
+  final String password;
+
+  User({
+    this.fullName = "",
+    this.userName = "",
+    this.matricNumber = "",
+    this.mobileNumber = 0,
+    this.email = "",
+    this.password = "",
+
+});
+
+  Map<String, dynamic> toJson() => {
+  'fullName': fullName,
+  'userName': userName,
+  'matricNumber': matricNumber,
+  'mobileNumber': mobileNumber,
+  'email': email,
+  'password': password,
+
+  };
 }
 
 class BookingRoom extends StatefulWidget {

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "561197505960",
+    "firebase_url": "https://hostel-management-ebe51-default-rtdb.firebaseio.com",
     "project_id": "hostel-management-ebe51",
     "storage_bucket": "hostel-management-ebe51.appspot.com"
   },
@@ -29,6 +30,13 @@
             {
               "client_id": "561197505960-fat6rpdc6g3t6ntcbksj8gg9l26i8pmt.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "561197505960-3u35nfjh6vip6c67f1jo9nbcof3jdle9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.code"
+              }
             }
           ]
         }

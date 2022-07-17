@@ -11,60 +11,6 @@ class MyRegister extends StatefulWidget {
 }
 
 class _MyRegisterState extends State<MyRegister> {
-  // final _fireStore = FirebaseFirestore.instance;
-  // final _auth = FirebaseAuth.instance;
-  // late User loggedInUser;
-
-  final TextEditingController _fullNameController = TextEditingController();
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _matricNumberController = TextEditingController();
-  final TextEditingController _mobileNumberController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  
-  final CollectionReference _students = FirebaseFirestore.instance.collection('student');
-
-  Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
-    if (documentSnapshot != null) {
-      _fullNameController.text = documentSnapshot['name'];
-      _usernameController.text = documentSnapshot['username'];
-      _matricNumberController.text = documentSnapshot['matricNumber'];
-      _mobileNumberController.text = documentSnapshot['mobileNumber'];
-      _emailController.text = documentSnapshot['email'];
-      _passwordController.text = documentSnapshot['password'];
-
-      final String? fullName = _fullNameController.text;
-      final String? username = _usernameController.text;
-      final String? matricNumber = _matricNumberController.text;
-      final int? mobileNumber = _mobileNumberController.text as int?;
-      final String? email = _emailController.text;
-      final String? password = _passwordController.text;
-
-      await _students.add({
-        "fullName": fullName,
-        "username": username,
-        "matricNumber": matricNumber,
-        "mobileNumber": mobileNumber,
-        "email": email,
-        "password": password,
-
-
-      });
-
-      _fullNameController.text = '';
-      _usernameController.text = '';
-      _matricNumberController.text = '';
-      _mobileNumberController.text = '';
-      _emailController.text = '';
-      _passwordController.text = '';
-
-
-
-    }
-  }
-
-
-
 
 
   @override
@@ -88,7 +34,6 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
-                  controller: _fullNameController,
                   decoration: const InputDecoration(
                       labelText: 'Full Name',
                       prefixIcon: Icon(Icons.person),
@@ -106,7 +51,7 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
-                  controller: _usernameController,
+
                   decoration: const InputDecoration(
                       labelText: 'Username',
                       prefixIcon: Icon(Icons.person),
@@ -124,7 +69,7 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  controller: _matricNumberController,
+
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     labelText: 'Matric Number',
@@ -148,7 +93,7 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  controller: _mobileNumberController,
+
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     labelText: 'Mobile Number',
@@ -172,7 +117,7 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  controller: _emailController,
+
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     labelText: 'Email',
@@ -196,7 +141,7 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  controller: _passwordController,
+
                   keyboardType: TextInputType.visiblePassword,
                   decoration: const InputDecoration(
                     labelText: 'Password',
@@ -222,7 +167,9 @@ class _MyRegisterState extends State<MyRegister> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _create(),
+        onPressed: () => setState(() {
+          Navigator.pushNamed(context, "room_screen");
+        }),
         tooltip: 'Next Page',
         child: const Icon(Icons.navigate_next),
       ),

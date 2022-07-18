@@ -12,6 +12,8 @@ class MyRegister extends StatefulWidget {
 
 class _MyRegisterState extends State<MyRegister> {
 
+  bool _isObscure = true;
+
   final fullNameController = TextEditingController();
   final usernameController = TextEditingController();
   final matricNumberController = TextEditingController();
@@ -158,20 +160,27 @@ class _MyRegisterState extends State<MyRegister> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   controller: passwordController,
+                  obscureText: _isObscure,
                   keyboardType: TextInputType.visiblePassword,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     labelText: 'Password',
                     hintText: 'Enter Your Password',
-                    prefixIcon: Icon(Icons.password),
-                    suffixIcon: Icon(
-                      Icons.delete_outline,
-                      color: Colors.red,
+                    prefixIcon: const Icon(Icons.password),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isObscure ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      },
                     ),
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       borderSide: BorderSide(color: Colors.black, width: 2.0),
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       borderSide: BorderSide(color: Colors.blue, width: 2.0),
                     ),
@@ -192,7 +201,9 @@ class _MyRegisterState extends State<MyRegister> {
             email: emailController.text,
             password: passwordController.text,
       );
-          Navigator.pushNamed(context, 'booking_screen');
+          setState(() {
+            Navigator.pushNamed(context, "room_screen");
+          });
           createUser(user);
 
         },

@@ -8,6 +8,39 @@ class MyRegister extends StatefulWidget {
 
   @override
   _MyRegisterState createState() => _MyRegisterState();
+
+}
+
+class User {
+  final String fullName;
+  final String userName;
+  final String matricNumber;
+  final int mobileNumber;
+  final String email;
+  final String password;
+  final String room;
+
+  User({
+    this.fullName = "",
+    this.userName = "",
+    this.matricNumber = "",
+    this.mobileNumber = 0,
+    this.email = "",
+    this.password = "",
+    this.room = "",
+
+  });
+
+  Map<String, dynamic> toJson() => {
+    'fullName': fullName,
+    'userName': userName,
+    'matricNumber': matricNumber,
+    'mobileNumber': mobileNumber,
+    'email': email,
+    'password': password,
+    'room': room,
+
+  };
 }
 
 class _MyRegisterState extends State<MyRegister> {
@@ -23,7 +56,9 @@ class _MyRegisterState extends State<MyRegister> {
 
   Future createUser(User user) async {
 
-    final docUser = FirebaseFirestore.instance.collection('student').doc();
+    final docUser = FirebaseFirestore.instance.collection('student').doc(user.matricNumber);
+
+    // final CollectionReference postRef = FirebaseFirestore.instance.collection('student');
 
     final json = user.toJson();
     await docUser.set(json);
@@ -200,6 +235,7 @@ class _MyRegisterState extends State<MyRegister> {
             mobileNumber: int.parse(phoneNumberController.text),
             email: emailController.text,
             password: passwordController.text,
+            room: "Room A",
       );
           setState(() {
             Navigator.pushNamed(context, "room_screen");
@@ -214,34 +250,7 @@ class _MyRegisterState extends State<MyRegister> {
   }
 }
 
-class User {
-  final String fullName;
-  final String userName;
-  final String matricNumber;
-  final int mobileNumber;
-  final String email;
-  final String password;
 
-  User({
-    this.fullName = "",
-    this.userName = "",
-    this.matricNumber = "",
-    this.mobileNumber = 0,
-    this.email = "",
-    this.password = "",
-
-});
-
-  Map<String, dynamic> toJson() => {
-  'fullName': fullName,
-  'userName': userName,
-  'matricNumber': matricNumber,
-  'mobileNumber': mobileNumber,
-  'email': email,
-  'password': password,
-
-  };
-}
 
 class BookingRoom extends StatefulWidget {
   const BookingRoom({Key? key}) : super(key: key);
@@ -251,11 +260,29 @@ class BookingRoom extends StatefulWidget {
 }
 
 class _BookingRoomState extends State<BookingRoom> {
+
+
+  Future addRoom(User user) async {
+
+    final docUser = FirebaseFirestore.instance.collection('student').doc(user.matricNumber);
+
+    // final CollectionReference postRef = FirebaseFirestore.instance.collection('student');
+
+    // docUser.update({'room': user.room});
+
+    final json = user.toJson();
+    await docUser.set(json);
+
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Registration Page'),
+        title: const Text('Registration Page'),
       ),
       body: Center(
         child: Row(
@@ -263,47 +290,38 @@ class _BookingRoomState extends State<BookingRoom> {
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                Card(
-                  child: SizedBox(
-                    width: 150,
-                    height: 150,
-                    child: Center(
-                      child: Text('Room A'),
-                    ),
-                  ),
+              children:  [
+                TextButton(
+                    onPressed: () {
+                      final user = User(
+                        room: 'Room A',
+                      );
+                      addRoom(user);
+                    },
+                    child: Text('Room A'),
                 ),
-                Card(
-                  child: SizedBox(
-                    width: 150,
-                    height: 150,
-                    child: Center(
-                      child: Text('Room C'),
-                    ),
-                  ),
+                TextButton(
+                  onPressed: () {
+
+                  },
+                  child: Text('Room C'),
                 ),
               ],
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                Card(
-                  child: SizedBox(
-                    width: 150,
-                    height: 150,
-                    child: Center(
-                      child: Text('Room B'),
-                    ),
-                  ),
+              children:  [
+                TextButton(
+                  onPressed: () {
+
+                  },
+                  child: Text('Room B'),
                 ),
-                Card(
-                  child: SizedBox(
-                    width: 150,
-                    height: 150,
-                    child: Center(
-                      child: Text('Room D'),
-                    ),
-                  ),
+                TextButton(
+                  onPressed: () {
+
+                  },
+                  child: Text('Room D'),
                 ),
               ],
             ),

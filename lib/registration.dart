@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class MyRegister extends StatefulWidget {
   const MyRegister({Key? key}) : super(key: key);
@@ -235,7 +233,7 @@ class _MyRegisterState extends State<MyRegister> {
             mobileNumber: int.parse(phoneNumberController.text),
             email: emailController.text,
             password: passwordController.text,
-            room: "Room A",
+            room: "",
       );
           setState(() {
             Navigator.pushNamed(context, "room_screen");
@@ -261,22 +259,25 @@ class BookingRoom extends StatefulWidget {
 
 class _BookingRoomState extends State<BookingRoom> {
 
+  CollectionReference users = FirebaseFirestore.instance.collection('student');
 
-  Future addRoom(User user) async {
-
-    final docUser = FirebaseFirestore.instance.collection('student').doc(user.matricNumber);
-
-    // final CollectionReference postRef = FirebaseFirestore.instance.collection('student');
-
-    // docUser.update({'room': user.room});
-
-    final json = user.toJson();
-    await docUser.set(json);
-
+  Future<void> updateRoom(User user) {
+    return users.doc(user.matricNumber).update({'room': user.room});
   }
 
 
-
+  // Future addRoom(User user) async {
+  //
+  //   final docUser = FirebaseFirestore.instance.collection('student').doc(user.matricNumber);
+  //
+  //   // final CollectionReference postRef = FirebaseFirestore.instance.collection('student');
+  //
+  //   // docUser.update({'room': user.room});
+  //
+  //   final json = user.toJson();
+  //   await docUser.set(json);
+  //
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -296,7 +297,7 @@ class _BookingRoomState extends State<BookingRoom> {
                       final user = User(
                         room: 'Room A',
                       );
-                      addRoom(user);
+                      updateRoom(user);
                     },
                     child: Text('Room A'),
                 ),

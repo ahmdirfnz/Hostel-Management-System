@@ -261,9 +261,7 @@ class _BookingRoomState extends State<BookingRoom> {
 
   CollectionReference users = FirebaseFirestore.instance.collection('student');
 
-  Future<void> updateRoom(User user) {
-    return users.doc(user.matricNumber).update({'room': user.room});
-  }
+
 
 
   // Future addRoom(User user) async {
@@ -294,10 +292,7 @@ class _BookingRoomState extends State<BookingRoom> {
               children:  [
                 TextButton(
                     onPressed: () {
-                      final user = User(
-                        room: 'Room A',
-                      );
-                      updateRoom(user);
+
                     },
                     child: Text('Room A'),
                 ),

@@ -289,8 +289,13 @@ class _BookingRoomState extends State<BookingRoom> {
                     onPressed: () {
                       setState(() {
                         _flagA = !_flagA;
+                        if(_flagA == false) {
+                          _flagB = true;
+                          _flagC = true;
+                          _flagD = true;
+                        }
                       });
-                      FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room A'});
+                      _flagA ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room A'}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''});
                     },
                   style: TextButton.styleFrom(backgroundColor: _flagA ? Colors.green : Colors.red),
                     child: const Text('Room A', style: TextStyle(color: Colors.white),),
@@ -299,8 +304,13 @@ class _BookingRoomState extends State<BookingRoom> {
                   onPressed: () {
                     setState(() {
                       _flagC = !_flagC;
+                      if(_flagC == false) {
+                        _flagB = true;
+                        _flagA = true;
+                        _flagD = true;
+                      }
                     });
-                    FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room C'});
+                    _flagC ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room C'}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''});
                   },
                   style: TextButton.styleFrom(backgroundColor: _flagC ? Colors.green : Colors.red),
                   child: const Text('Room C', style: TextStyle(color: Colors.white),),
@@ -314,6 +324,11 @@ class _BookingRoomState extends State<BookingRoom> {
                   onPressed: () {
                     setState(() {
                       _flagB = !_flagB;
+                      if(_flagB == false) {
+                        _flagA = true;
+                        _flagC = true;
+                        _flagD = true;
+                      }
                     });
                     // FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room B'});
                     _flagB ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room B'}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''});
@@ -325,8 +340,13 @@ class _BookingRoomState extends State<BookingRoom> {
                   onPressed: () {
                     setState(() {
                       _flagD = !_flagD;
+                      if(_flagD == false) {
+                        _flagB = true;
+                        _flagC = true;
+                        _flagA = true;
+                      }
                     });
-                    FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room D'});
+                    _flagD ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room D'}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''});
 
                   },
                   style: TextButton.styleFrom(backgroundColor: _flagD ? Colors.green : Colors.red),

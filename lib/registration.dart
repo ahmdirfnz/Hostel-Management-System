@@ -384,24 +384,21 @@ class _InfoPageState extends State<InfoPage> {
         title: Text('Info Page'),
       ),
       body: Center(
-          child: ListView(
-        children: const [
-          Card(
-              child: ListTile(
-            title: Text("List Item 1"),
+          child: Column(
+            children: [
+              const Spacer(),
+              Card(
+                elevation: 0,
+                color: Theme.of(context).colorScheme.surfaceVariant,
+                child: const SizedBox(
+                  width: 350,
+                  height: 200,
+                  child: Center(child: Text('Filled Card')),
+                ),
+              ),
+              const Spacer(),
+            ],
           )),
-          Card(
-            child: ListTile(
-              title: Text("List Item 2"),
-            ),
-          ),
-          Card(
-              child: ListTile(
-            title: Text("List Item 3"),
-          )),
-        ],
-        padding: EdgeInsets.all(10),
-      )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // FirebaseFirestore.instance.collection('student').add({'text': 'data added'});

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -121,7 +122,7 @@ class _MyRegisterState extends State<MyRegister> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                 controller: matricNumberController,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   decoration: const InputDecoration(
                     labelText: 'Matric Number',
                     hintText: 'Enter Your Matric Number',
@@ -226,7 +227,7 @@ class _MyRegisterState extends State<MyRegister> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          final user = User (
+            final user = User (
             fullName: fullNameController.text,
             userName: usernameController.text,
             matricNumber: matricNumberController.text,
@@ -235,10 +236,12 @@ class _MyRegisterState extends State<MyRegister> {
             password: passwordController.text,
             room: "",
       );
-          setState(() {
-            Navigator.pushNamed(context, "room_screen");
-          });
+
           createUser(user);
+            setState(() {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => BookingRoom(matricNumber: matricNumberController.text)));
+              Navigator.pushNamed(context, "room_screen");
+            });
 
         },
         tooltip: 'Next Page',
@@ -251,7 +254,9 @@ class _MyRegisterState extends State<MyRegister> {
 
 
 class BookingRoom extends StatefulWidget {
-  const BookingRoom({Key? key}) : super(key: key);
+  const BookingRoom({Key? key, required this.matricNumber}) : super(key: key);
+
+  final String matricNumber;
 
   @override
   _BookingRoomState createState() => _BookingRoomState();
@@ -262,23 +267,15 @@ class _BookingRoomState extends State<BookingRoom> {
   CollectionReference users = FirebaseFirestore.instance.collection('student');
 
 
-
-
   // Future addRoom(User user) async {
   //
-  //   final docUser = FirebaseFirestore.instance.collection('student').doc(user.matricNumber);
-  //
-  //   // final CollectionReference postRef = FirebaseFirestore.instance.collection('student');
-  //
-  //   // docUser.update({'room': user.room});
-  //
-  //   final json = user.toJson();
-  //   await docUser.set(json);
+  //   // FirebaseFirestore.instance.collection('student').doc('${widget.matricNumber}').update({'room': 'Room A'});
   //
   // }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registration Page'),
@@ -293,12 +290,13 @@ class _BookingRoomState extends State<BookingRoom> {
                 TextButton(
                     onPressed: () {
 
+                      FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room A'});
                     },
-                    child: Text('Room A'),
+                    child: Text(widget.matricNumber),
                 ),
                 TextButton(
                   onPressed: () {
-
+                    // FirebaseFirestore.instance.collection('student').doc(user.matricNumber).update({'room': 'Room C'});
                   },
                   child: Text('Room C'),
                 ),
@@ -309,12 +307,15 @@ class _BookingRoomState extends State<BookingRoom> {
               children:  [
                 TextButton(
                   onPressed: () {
-
+                    // addRoom(user);
+                    // FirebaseFirestore.instance.collection('student').doc(user.matricNumber).update({'room': 'Room B'});
                   },
                   child: Text('Room B'),
                 ),
                 TextButton(
                   onPressed: () {
+
+                    // FirebaseFirestore.instance.collection('student').doc(user.matricNumber).update({'room': 'Room D'});
 
                   },
                   child: Text('Room D'),

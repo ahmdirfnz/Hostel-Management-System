@@ -239,9 +239,10 @@ class _MyRegisterState extends State<MyRegister> {
 
           createUser(user);
             setState(() {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => BookingRoom(matricNumber: matricNumberController.text)));
+
               Navigator.pushNamed(context, "room_screen");
             });
+            Navigator.push(context, MaterialPageRoute(builder: (context) => BookingRoom(matricNumber: matricNumberController.text,)));
 
         },
         tooltip: 'Next Page',
@@ -264,7 +265,7 @@ class BookingRoom extends StatefulWidget {
 
 class _BookingRoomState extends State<BookingRoom> {
 
-  CollectionReference users = FirebaseFirestore.instance.collection('student');
+  // CollectionReference users = FirebaseFirestore.instance.collection('student');
 
 
   // Future addRoom(User user) async {
@@ -292,11 +293,11 @@ class _BookingRoomState extends State<BookingRoom> {
 
                       FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room A'});
                     },
-                    child: Text(widget.matricNumber),
+                    child: Text('Room A'),
                 ),
                 TextButton(
                   onPressed: () {
-                    // FirebaseFirestore.instance.collection('student').doc(user.matricNumber).update({'room': 'Room C'});
+                    FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room C'});
                   },
                   child: Text('Room C'),
                 ),
@@ -308,14 +309,14 @@ class _BookingRoomState extends State<BookingRoom> {
                 TextButton(
                   onPressed: () {
                     // addRoom(user);
-                    // FirebaseFirestore.instance.collection('student').doc(user.matricNumber).update({'room': 'Room B'});
+                    FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room B'});
                   },
                   child: Text('Room B'),
                 ),
                 TextButton(
                   onPressed: () {
 
-                    // FirebaseFirestore.instance.collection('student').doc(user.matricNumber).update({'room': 'Room D'});
+                    FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room D'});
 
                   },
                   child: Text('Room D'),

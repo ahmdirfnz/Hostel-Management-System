@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -265,15 +264,6 @@ class BookingRoom extends StatefulWidget {
 
 class _BookingRoomState extends State<BookingRoom> {
 
-  // CollectionReference users = FirebaseFirestore.instance.collection('student');
-
-
-  // Future addRoom(User user) async {
-  //
-  //   // FirebaseFirestore.instance.collection('student').doc('${widget.matricNumber}').update({'room': 'Room A'});
-  //
-  // }
-
   @override
   Widget build(BuildContext context) {
 
@@ -293,13 +283,13 @@ class _BookingRoomState extends State<BookingRoom> {
 
                       FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room A'});
                     },
-                    child: Text('Room A'),
+                    child: const Text('Room A'),
                 ),
                 TextButton(
                   onPressed: () {
                     FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room C'});
                   },
-                  child: Text('Room C'),
+                  child: const Text('Room C'),
                 ),
               ],
             ),
@@ -311,7 +301,7 @@ class _BookingRoomState extends State<BookingRoom> {
                     // addRoom(user);
                     FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room B'});
                   },
-                  child: Text('Room B'),
+                  child: const Text('Room B'),
                 ),
                 TextButton(
                   onPressed: () {
@@ -319,7 +309,7 @@ class _BookingRoomState extends State<BookingRoom> {
                     FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room D'});
 
                   },
-                  child: Text('Room D'),
+                  child: const Text('Room D'),
                 ),
               ],
             ),
@@ -372,7 +362,7 @@ class _InfoPageState extends State<InfoPage> {
       )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          FirebaseFirestore.instance.collection('student').add({'text': 'data added'});
+          // FirebaseFirestore.instance.collection('student').add({'text': 'data added'});
         },
         tooltip: 'Next Page',
         child: const Icon(Icons.navigate_next),

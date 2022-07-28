@@ -269,8 +269,6 @@ class _BookingRoomState extends State<BookingRoom> {
   bool _flagC = true;
   bool _flagD = true;
 
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -279,79 +277,86 @@ class _BookingRoomState extends State<BookingRoom> {
         title: const Text('Registration Page'),
       ),
       body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
+            const Text('Please Select Available Room', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+            const SizedBox(height: 20.0),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:  [
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _flagA = !_flagA;
-                        if(_flagA == false) {
-                          _flagB = true;
-                          _flagC = true;
-                          _flagD = true;
-                        }
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:  [
+                    TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _flagA = !_flagA;
+                            if(_flagA == false) {
+                              _flagB = true;
+                              _flagC = true;
+                              _flagD = true;
+                            }
 
-                      });
-                      _flagA ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room A'});
-                    },
-                  style: TextButton.styleFrom(backgroundColor: _flagA ? Colors.green : Colors.red),
-                    child: const Text('Room A', style: TextStyle(color: Colors.white),),
+                          });
+                          _flagA ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room A'});
+                        },
+                      style: TextButton.styleFrom(backgroundColor: _flagA ? Colors.green : Colors.red),
+                        child: const Text('Room A', style: TextStyle(color: Colors.white),),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _flagC = !_flagC;
+                          if(_flagC == false) {
+                            _flagB = true;
+                            _flagA = true;
+                            _flagD = true;
+                          }
+                        });
+                        _flagC ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room C'});
+                      },
+                      style: TextButton.styleFrom(backgroundColor: _flagC ? Colors.green : Colors.red),
+                      child: const Text('Room C', style: TextStyle(color: Colors.white),),
+                    ),
+                  ],
                 ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      _flagC = !_flagC;
-                      if(_flagC == false) {
-                        _flagB = true;
-                        _flagA = true;
-                        _flagD = true;
-                      }
-                    });
-                    _flagC ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room C'});
-                  },
-                  style: TextButton.styleFrom(backgroundColor: _flagC ? Colors.green : Colors.red),
-                  child: const Text('Room C', style: TextStyle(color: Colors.white),),
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:  [
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      _flagB = !_flagB;
-                      if(_flagB == false) {
-                        _flagA = true;
-                        _flagC = true;
-                        _flagD = true;
-                      }
-                    });
-                    // FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room B'});
-                    _flagB ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room B'});
-                  },
-                  style: TextButton.styleFrom(backgroundColor: _flagB ? Colors.green : Colors.red),
-                  child: const Text('Room B', style: TextStyle(color: Colors.white),),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      _flagD = !_flagD;
-                      if(_flagD == false) {
-                        _flagB = true;
-                        _flagC = true;
-                        _flagA = true;
-                      }
-                    });
-                    _flagD ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room D'});
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:  [
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _flagB = !_flagB;
+                          if(_flagB == false) {
+                            _flagA = true;
+                            _flagC = true;
+                            _flagD = true;
+                          }
+                        });
+                        // FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room B'});
+                        _flagB ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room B'});
+                      },
+                      style: TextButton.styleFrom(backgroundColor: _flagB ? Colors.green : Colors.red),
+                      child: const Text('Room B', style: TextStyle(color: Colors.white),),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _flagD = !_flagD;
+                          if(_flagD == false) {
+                            _flagB = true;
+                            _flagC = true;
+                            _flagA = true;
+                          }
+                        });
+                        _flagD ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room D'});
 
-                  },
-                  style: TextButton.styleFrom(backgroundColor: _flagD ? Colors.green : Colors.red),
-                  child: const Text('Room D', style: TextStyle(color: Colors.white),),
+                      },
+                      style: TextButton.styleFrom(backgroundColor: _flagD ? Colors.green : Colors.red),
+                      child: const Text('Room D', style: TextStyle(color: Colors.white),),
+                    ),
+                  ],
                 ),
               ],
             ),

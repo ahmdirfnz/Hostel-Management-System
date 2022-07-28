@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         'home_screen': (context) => HomeScreen(),
         'registration_screen': (context) => MyRegister(),
         'room_screen': (context) => BookingRoom(matricNumber: '',),
-        'info_screen': (context) => InfoPage(),
+        'info_screen': (context) => InfoPage(matricNumber: '',),
       },
     );
   }

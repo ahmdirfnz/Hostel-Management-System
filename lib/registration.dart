@@ -242,6 +242,7 @@ class _MyRegisterState extends State<MyRegister> {
               Navigator.pushNamed(context, "room_screen");
             });
             Navigator.push(context, MaterialPageRoute(builder: (context) => BookingRoom(matricNumber: matricNumberController.text,)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => InfoPage(matricNumber: matricNumberController.text,)));
 
         },
         tooltip: 'Next Page',
@@ -375,42 +376,64 @@ class _BookingRoomState extends State<BookingRoom> {
 }
 
 class InfoPage extends StatefulWidget {
-  const InfoPage({Key? key}) : super(key: key);
+  const InfoPage({Key? key, required this.matricNumber}) : super(key: key);
+
+  final String matricNumber;
 
   @override
   _InfoPageState createState() => _InfoPageState();
 }
 
 class _InfoPageState extends State<InfoPage> {
+
+  CollectionReference users = FirebaseFirestore.instance.collection('student');
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Info Page'),
-      ),
-      body: Center(
-          child: Column(
-            children: [
-              const Spacer(),
-              Card(
-                elevation: 0,
-                color: Theme.of(context).colorScheme.surfaceVariant,
-                child: const SizedBox(
-                  width: 350,
-                  height: 200,
-                  child: Center(child: Text('Filled Card')),
-                ),
+    return FutureBuilder<DocumentSnapshot>(
+      future: users.doc(widget.matricNumber).get(),
+        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if(snapshot.connectionState == ConnectionState.done) {
+
+          Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+          return Scaffold(
+              appBar: AppBar(
+                title: Text('Info Page'),
               ),
-              const Spacer(),
-            ],
-          )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // FirebaseFirestore.instance.collection('student').add({'text': 'data added'});
+              body: Center(
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      Card(
+                        elevation: 0,
+                        color: Theme.of(context).colorScheme.surfaceVariant,
+                        child:  SizedBox(
+                          width: 350,
+                          height: 200,
+                          child: Center(child: Text("Full Name: ${data['fullName']}")),
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
+                  )),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "home_screen");
+                  // FirebaseFirestore.instance.collection('student').add({'text': 'data added'});
+                },
+                tooltip: 'Next Page',
+                child: const Icon(Icons.navigate_next),
+              ),
+            );
+
+        }
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Info Page'),
+          ),
+        );
         },
-        tooltip: 'Next Page',
-        child: const Icon(Icons.navigate_next),
-      ),
     );
+    //
   }
 }

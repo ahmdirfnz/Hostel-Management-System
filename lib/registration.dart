@@ -242,7 +242,7 @@ class _MyRegisterState extends State<MyRegister> {
               Navigator.pushNamed(context, "room_screen");
             });
             Navigator.push(context, MaterialPageRoute(builder: (context) => BookingRoom(matricNumber: matricNumberController.text,)));
-            Navigator.push(context, MaterialPageRoute(builder: (context) => InfoPage(matricNumber: matricNumberController.text,)));
+
 
         },
         tooltip: 'Next Page',
@@ -367,6 +367,7 @@ class _BookingRoomState extends State<BookingRoom> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => setState(() {
           Navigator.pushNamed(context, 'info_screen');
+          Navigator.push(context, MaterialPageRoute(builder: (context) => InfoPage(matricNumber: widget.matricNumber,)));
         }),
         tooltip: 'Next Page',
         child: const Icon(Icons.navigate_next),

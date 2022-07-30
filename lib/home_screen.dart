@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.logout),
           ),
         ],
-        title: Text('Home Page'),
+        title: const Text('Home Page'),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: Center(
@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               title: const Text('Calendar'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, 'calendar_screen');
               },
             ),
           ],

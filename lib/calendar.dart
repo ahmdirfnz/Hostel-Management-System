@@ -1,5 +1,6 @@
+
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({Key? key}) : super(key: key);
@@ -9,9 +10,22 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Calendar'),
+      ),
+      body: TableCalendar(
+        firstDay: DateTime.utc(2010, 10, 16),
+        lastDay: DateTime.utc(2030, 3, 14),
+        focusedDay: DateTime.now(),
+      ),
+    );
   }
 
 }

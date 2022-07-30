@@ -13,7 +13,7 @@ class User {
   final String fullName;
   final String userName;
   final String matricNumber;
-  final int mobileNumber;
+  final String mobileNumber;
   final String email;
   final String password;
   final String room;
@@ -22,7 +22,7 @@ class User {
     this.fullName = "",
     this.userName = "",
     this.matricNumber = "",
-    this.mobileNumber = 0,
+    this.mobileNumber = "",
     this.email = "",
     this.password = "",
     this.room = "",
@@ -145,7 +145,7 @@ class _MyRegisterState extends State<MyRegister> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   controller: phoneNumberController,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   decoration: const InputDecoration(
                     labelText: 'Mobile Number',
                     hintText: 'Enter Mobile Number',
@@ -230,7 +230,7 @@ class _MyRegisterState extends State<MyRegister> {
             fullName: fullNameController.text,
             userName: usernameController.text,
             matricNumber: matricNumberController.text,
-            mobileNumber: int.parse(phoneNumberController.text),
+            mobileNumber: phoneNumberController.text,
             email: emailController.text,
             password: passwordController.text,
             room: "",
@@ -411,7 +411,8 @@ class _InfoPageState extends State<InfoPage> {
                         child:  SizedBox(
                           width: 350,
                           height: 200,
-                          child: Center(child: Text("Full Name: ${data['fullName']}")),
+                          child: Center(child: Text("Full Name: ${data['fullName']}\n"
+                              "Matric Number: ${data['matricNumber']}")),
                         ),
                       ),
                       const Spacer(),

@@ -26,7 +26,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   fontWeight: FontWeight.bold,
                   fontFamily: 'playball'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 24.0,
             ),
             TextButton(
@@ -49,7 +49,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     fontSize: 20.0,
                   ),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 24.0,
             ),
             TextButton(

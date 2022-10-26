@@ -40,11 +40,22 @@ class _LoginScreenState extends State<LoginScreen> {
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const Text(
+                'Hostel Management',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'playball'),
+              ),
+              const SizedBox(
+                height: 30.0,
+              ),
               TextField(
                   keyboardType: TextInputType.emailAddress,
                   textAlign: TextAlign.center,
@@ -54,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: kTextFieldDecoration.copyWith(
                     hintText: 'Enter Your Email',
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 24.0,
               ),
               TextField(
@@ -66,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   decoration: kTextFieldDecoration.copyWith(
                       hintText: 'Enter your password.')),
-              SizedBox(
+              const SizedBox(
                 height: 24.0,
               ),
               TextButton(

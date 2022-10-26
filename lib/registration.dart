@@ -78,7 +78,7 @@ class _MyRegisterState extends State<MyRegister> {
                 'Registration Page',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
               )),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               Padding(
@@ -399,20 +399,29 @@ class _InfoPageState extends State<InfoPage> {
           Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
           return Scaffold(
               appBar: AppBar(
-                title: Text('Info Page'),
+                title: const Text('Info Page'),
               ),
               body: Center(
                   child: Column(
                     children: [
                       const Spacer(),
                       Card(
-                        elevation: 0,
+                        elevation: 13,
+                        shape: const RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Colors.black,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(15))
+                        ),
                         color: Theme.of(context).colorScheme.surfaceVariant,
                         child:  SizedBox(
                           width: 350,
                           height: 200,
-                          child: Center(child: Text("Full Name: ${data['fullName']}\n"
-                              "Matric Number: ${data['matricNumber']}")),
+                          child: Center(
+                              child: Text("Full Name: ${data['fullName']}\n"
+                              "Matric Number: ${data['matricNumber']}")
+                          ),
                         ),
                       ),
                       const Spacer(),

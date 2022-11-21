@@ -16,10 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget> [
-    Text(
-      'Home',
-    style: optionStyle,
-    ),
+    HomePage(),
     Text(
       'News',
       style: optionStyle,
@@ -63,10 +60,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 _auth.signOut();
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.logout),
+              icon: const Icon(Icons.logout),
           ),
         ],
-        title: const Text('Home Page'),
+        title: const Text('Hostel Management'),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: Center(
@@ -91,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               title: const Text('Report Form'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, 'report screen');
               },
             ),
             ListTile(
@@ -125,3 +122,73 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final Color flavorColor = Colors.blueAccent;
+  final String flavor = 'NEWS';
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 30.0,
+          ),
+          Center(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.all(8),
+                    height: 150,
+                    width: 300,
+                    color: flavorColor,
+                    child: Text(flavor),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    height: 150,
+                    width: 300,
+                    color: flavorColor,
+                    child: Text(flavor),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    height: 150,
+                    width: 300,
+                    color: flavorColor,
+                    child: Text(flavor),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    height: 150,
+                    width: 300,
+                    color: flavorColor,
+                    child: Text(flavor),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    height: 150,
+                    width: 300,
+                    color: flavorColor,
+                    child: Text(flavor),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+

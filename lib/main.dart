@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:code/calendar.dart';
 import 'package:code/registration.dart';
+import 'package:code/report.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'welcome_screen.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         'room_screen': (context) => const BookingRoom(matricNumber: '',),
         'info_screen': (context) => const InfoPage(matricNumber: '',),
         'calendar_screen': (context) => Calendar(),
+        'report screen': (context) => ReportForm(),
       },
     );
   }

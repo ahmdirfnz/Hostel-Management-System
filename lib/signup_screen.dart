@@ -64,7 +64,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   },
                   decoration: kTextFieldDecoration.copyWith(
                       hintText: 'Enter your Password')),
-              SizedBox(
+              const SizedBox(
                 height: 24.0,
               ),
               TextButton(
@@ -74,9 +74,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       });
       try {
         final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-        if (newUser != null) {
-          Navigator.pushNamed(context, 'home_screen');
-        }
+        Navigator.pushNamed(context, 'home_screen');
       } catch (e) {
         print(e);
       }

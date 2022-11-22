@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ReportForm extends StatefulWidget {
   const ReportForm({Key? key}) : super(key: key);
@@ -7,12 +8,46 @@ class ReportForm extends StatefulWidget {
   _ReportFormState createState() => _ReportFormState();
 }
 
+class UserComplaint {
+  final String matricNumber;
+  final String roomNumber;
+  final String complaintType;
+  final String complaint;
+
+  UserComplaint({
+    this.matricNumber = "",
+    this.roomNumber = "",
+    this.complaintType = "",
+    this.complaint = "",
+
+  });
+
+  Map<String, dynamic> toJson() => {
+    'matricNumber': matricNumber,
+    'roomNumber': roomNumber,
+    'complaintType': complaintType,
+    'complaint': complaint,
+
+  };
+}
+
 
 class _ReportFormState extends State<ReportForm> {
 
   final _formKey = GlobalKey<FormState>();
 
+  final matricNumberController = TextEditingController();
+  final roomNumberController = TextEditingController();
+  final complaintController = TextEditingController();
+
   String selectedValue = 'Room';
+
+  Future createUser(UserComplaint usercomplaint) async {
+    final docUserComplaint = FirebaseFirestore.instance.collection('student complaint').doc(usercomplaint.matricNumber);
+
+    final json = usercomplaint.toJson();
+    await docUserComplaint.set(json);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +70,21 @@ class _ReportFormState extends State<ReportForm> {
                   children: [
                     const SizedBox(
                       height: 30.0,
+                    ),
+                    TextFormField(
+                      controller: matricNumberController,
+                      decoration: const InputDecoration(
+                        labelText: "Matric Number",
+                      ),
+                      validator: (value) {
+                        if(value == null || value.isEmpty) {
+                          return 'Please enter matric number';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15.0,
                     ),
                     DropdownButtonFormField(
                       decoration: const InputDecoration(
@@ -63,6 +113,7 @@ class _ReportFormState extends State<ReportForm> {
                       height: 25.0,
                     ),
                     TextFormField(
+                      controller: roomNumberController,
                       decoration: const InputDecoration(
                         labelText: "Room Number",
                       ),
@@ -76,8 +127,9 @@ class _ReportFormState extends State<ReportForm> {
                     const SizedBox(
                       height: 15.0,
                     ),
-                    const TextField(
-                      decoration: InputDecoration(
+                    TextField(
+                      controller: complaintController,
+                      decoration: const InputDecoration(
                           labelText: 'Enter Your Concern Here'
                       ),
                       keyboardType: TextInputType.multiline,
@@ -89,17 +141,18 @@ class _ReportFormState extends State<ReportForm> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        // Validate returns true if the form is valid, or false otherwise.
-                        if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );
-                        }
+                        final userComplaint = UserComplaint(
+                          matricNumber: matricNumberController.text,
+                          roomNumber: roomNumberController.text,
+                          complaint: complaintController.text
+                        );
+                        createUser(userComplaint);
+
                       },
                       child: const Text('Submit'),
                     ),
                   ],
-                )
+                ),
             ),
           ),
         ),

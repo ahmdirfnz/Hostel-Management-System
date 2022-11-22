@@ -52,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: null,
         actions: [
@@ -139,8 +140,21 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          Container(
+            margin: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+            child: TextField(
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.search),
+                hintText: 'Search your building location',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(color: Colors.blueAccent),
+                )
+              ),
+            ),
+          ),
           const SizedBox(
-            height: 30.0,
+            height: 5.0,
           ),
           Center(
             child: SingleChildScrollView(
@@ -148,43 +162,152 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: [
                   Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blueAccent,
+                    ),
+                    margin: const EdgeInsets.all(8),
+                    height: 130,
+                    width: 260,
+                    child: Center(child: Text(flavor, style: TextStyle(color: Colors.white),)),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blueAccent,
+                    ),
+                    margin: const EdgeInsets.all(8),
+                    height: 130,
+                    width: 260,
+                    child: Center(child: Text(flavor)),
+                  ),Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blueAccent,
+                    ),
+                    margin: const EdgeInsets.all(8),
+                    height: 130,
+                    width: 260,
+                    child: Center(child: Text(flavor)),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blueAccent,
+                    ),
+                    margin: const EdgeInsets.all(8),
+                    height: 130,
+                    width: 260,
+                    child: Center(child: Text(flavor)),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blueAccent,
+                    ),
                     margin: const EdgeInsets.all(8),
                     height: 150,
                     width: 300,
-                    color: flavorColor,
-                    child: Text(flavor),
+                    child: Center(child: Text(flavor)),
                   ),
                   Container(
-                    margin: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blueAccent,
+                    ),
+                    margin: const EdgeInsets.all(8),
                     height: 150,
                     width: 300,
-                    color: flavorColor,
-                    child: Text(flavor),
+                    child: Center(child: Text(flavor)),
                   ),
                   Container(
-                    margin: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blueAccent,
+                    ),
+                    margin: const EdgeInsets.all(8),
                     height: 150,
                     width: 300,
-                    color: flavorColor,
-                    child: Text(flavor),
+                    child: Center(child: Text(flavor)),
                   ),
                   Container(
-                    margin: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blueAccent,
+                    ),
+                    margin: const EdgeInsets.all(8),
                     height: 150,
                     width: 300,
-                    color: flavorColor,
-                    child: Text(flavor),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(8),
-                    height: 150,
-                    width: 300,
-                    color: flavorColor,
-                    child: Text(flavor),
+                    child: Center(child: Text(flavor)),
                   ),
                 ],
               ),
             ),
+          ),
+          const SizedBox(
+            height: 15.0,
+          ),
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Card(
+                    child: InkWell(
+                      onTap: () {
+                        print("tapped");
+                      },
+                      child: Container(
+                        child: Center(child: Text('Bus')),
+                        width: 170.0,
+                        height: 120.0,
+                      ),
+                    ),
+                  ),
+                  Card(
+                    child: InkWell(
+                      onTap: () {
+                        print("tapped");
+                      },
+                      child: const SizedBox(
+                        child: Center(child: Text('Bus')),
+                        width: 170.0,
+                        height: 120.0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Card(
+                    child: InkWell(
+                      onTap: () {
+                        print("tapped");
+                      },
+                      child: const SizedBox(
+                        child: Center(child: Text('Bus')),
+                        width: 170.0,
+                        height: 120.0,
+                      ),
+                    ),
+                  ),
+                  Card(
+                    child: InkWell(
+                      onTap: () {
+                        print("tapped");
+                      },
+                      child: const SizedBox(
+                        child: Center(child: Text('Bus')),
+                        width: 170.0,
+                        height: 120.0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),

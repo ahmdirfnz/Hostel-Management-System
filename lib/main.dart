@@ -36,8 +36,8 @@ class MyApp extends StatelessWidget {
         'registration_screen': (context) => const MyRegister(),
         'room_screen': (context) => const BookingRoom(matricNumber: '',),
         'info_screen': (context) => const InfoPage(matricNumber: '',),
-        'calendar_screen': (context) => Calendar(),
-        'report screen': (context) => ReportForm(),
+        'calendar_screen': (context) => DynamicEvent(),
+        'report screen': (context) => const ReportForm(),
       },
     );
   }

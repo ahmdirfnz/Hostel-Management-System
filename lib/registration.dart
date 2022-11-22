@@ -82,7 +82,7 @@ class _MyRegisterState extends State<MyRegister> {
                 height: 20.0,
               ),
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: TextField(
                   controller: fullNameController,
                   decoration: const InputDecoration(

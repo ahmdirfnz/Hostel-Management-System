@@ -307,6 +307,35 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Card(
+                    child: InkWell(
+                      onTap: () {
+                        print("tapped");
+                      },
+                      child: const SizedBox(
+                        child: Center(child: Text('Bus')),
+                        width: 170.0,
+                        height: 120.0,
+                      ),
+                    ),
+                  ),
+                  Card(
+                    child: InkWell(
+                      onTap: () {
+                        print("tapped");
+                      },
+                      child: const SizedBox(
+                        child: Center(child: Text('Bus')),
+                        width: 170.0,
+                        height: 120.0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ],

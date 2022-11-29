@@ -53,6 +53,10 @@ class _DynamicEventState extends State<DynamicEvent> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white,),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
         title: const Text('Calendar Event'),
@@ -79,7 +83,7 @@ class _DynamicEventState extends State<DynamicEvent> {
                   color: Colors.blue[700],
                   borderRadius: BorderRadius.circular(20.0),
                 ),
-                formatButtonTextStyle: TextStyle(color: Colors.white),
+                formatButtonTextStyle: const TextStyle(color: Colors.white),
                 formatButtonShowsNext: false,
               ),
               startingDayOfWeek: StartingDayOfWeek.monday,

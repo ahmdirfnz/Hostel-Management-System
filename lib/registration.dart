@@ -65,6 +65,7 @@ class _MyRegisterState extends State<MyRegister> {
 
   @override
   Widget build(BuildContext context) {
+    final bool showFab = MediaQuery.of(context).viewInsets.bottom == 0.0;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Form(
@@ -224,7 +225,7 @@ class _MyRegisterState extends State<MyRegister> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: showFab ? FloatingActionButton(
         onPressed: () {
             final user = User (
             fullName: fullNameController.text,
@@ -247,7 +248,7 @@ class _MyRegisterState extends State<MyRegister> {
         },
         tooltip: 'Next Page',
         child: const Icon(Icons.navigate_next),
-      ),
+      ) : null,
     );
   }
 }

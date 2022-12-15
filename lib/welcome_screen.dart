@@ -52,17 +52,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(
               height: 24.0,
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "home_screen");
-              },
-              child: const Text(
-                'Testing',
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
           ],
         ),
       ),

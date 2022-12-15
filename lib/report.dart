@@ -188,7 +188,8 @@ class _ReportFormState extends State<ReportForm> {
                           final userComplaint = UserComplaint(
                             matricNumber: matricNumberController.text,
                             roomNumber: roomNumberController.text,
-                            complaint: complaintController.text
+                            complaintType: selectedValue,
+                            complaint: complaintController.text,
                           );
                           createUser(userComplaint);
 

@@ -9,7 +9,7 @@ class MyRegister extends StatefulWidget {
 
 }
 
-class User {
+class StudentUser {
   final String fullName;
   final String userName;
   final String matricNumber;
@@ -18,7 +18,7 @@ class User {
   final String password;
   final String room;
 
-  User({
+  StudentUser({
     this.fullName = "",
     this.userName = "",
     this.matricNumber = "",
@@ -52,7 +52,7 @@ class _MyRegisterState extends State<MyRegister> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Future createUser(User user) async {
+  Future createUser(StudentUser user) async {
 
     final docUser = FirebaseFirestore.instance.collection('student').doc(user.matricNumber);
 
@@ -101,7 +101,7 @@ class _MyRegisterState extends State<MyRegister> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: TextField(
                   controller: usernameController,
                   decoration: const InputDecoration(
@@ -227,7 +227,7 @@ class _MyRegisterState extends State<MyRegister> {
       ),
       floatingActionButton: showFab ? FloatingActionButton(
         onPressed: () {
-            final user = User (
+            final user = StudentUser (
             fullName: fullNameController.text,
             userName: usernameController.text,
             matricNumber: matricNumberController.text,
@@ -301,10 +301,10 @@ class _BookingRoomState extends State<BookingRoom> {
                             }
 
                           });
-                          _flagA ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room A'});
+                          _flagA ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'SJ-J-3-08-A'});
                         },
                       style: TextButton.styleFrom(backgroundColor: _flagA ? Colors.green : Colors.red),
-                        child: const Text('Room A', style: TextStyle(color: Colors.white),),
+                        child: const Text('SJ-J-3-08-A', style: TextStyle(color: Colors.white),),
                     ),
                     TextButton(
                       onPressed: () {
@@ -316,10 +316,10 @@ class _BookingRoomState extends State<BookingRoom> {
                             _flagD = true;
                           }
                         });
-                        _flagC ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room C'});
+                        _flagC ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'SJ-J-3-08-C'});
                       },
                       style: TextButton.styleFrom(backgroundColor: _flagC ? Colors.green : Colors.red),
-                      child: const Text('Room C', style: TextStyle(color: Colors.white),),
+                      child: const Text('SJ-J-3-08-C', style: TextStyle(color: Colors.white),),
                     ),
                   ],
                 ),
@@ -337,10 +337,10 @@ class _BookingRoomState extends State<BookingRoom> {
                           }
                         });
                         // FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room B'});
-                        _flagB ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room B'});
+                        _flagB ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'SJ-J-3-08-B'});
                       },
                       style: TextButton.styleFrom(backgroundColor: _flagB ? Colors.green : Colors.red),
-                      child: const Text('Room B', style: TextStyle(color: Colors.white),),
+                      child: const Text('SJ-J-3-08-B', style: TextStyle(color: Colors.white),),
                     ),
                     TextButton(
                       onPressed: () {
@@ -352,11 +352,11 @@ class _BookingRoomState extends State<BookingRoom> {
                             _flagA = true;
                           }
                         });
-                        _flagD ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room D'});
+                        _flagD ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'SJ-J-3-08-D'});
 
                       },
                       style: TextButton.styleFrom(backgroundColor: _flagD ? Colors.green : Colors.red),
-                      child: const Text('Room D', style: TextStyle(color: Colors.white),),
+                      child: const Text('SJ-J-3-08-D', style: TextStyle(color: Colors.white),),
                     ),
                   ],
                 ),
@@ -421,7 +421,8 @@ class _InfoPageState extends State<InfoPage> {
                           height: 200,
                           child: Center(
                               child: Text("Full Name: ${data['fullName']}\n"
-                              "Matric Number: ${data['matricNumber']}")
+                              "Matric Number: ${data['matricNumber']}\n"
+                                  "Room Number: ${data['room']}"),
                           ),
                         ),
                       ),

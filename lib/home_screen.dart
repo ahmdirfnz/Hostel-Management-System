@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
               onPressed: () {
                 _auth.signOut();
-                Navigator.pop(context);
+                Navigator.pushNamed(context, 'welcome_screen');
               },
               icon: const Icon(Icons.logout),
           ),
@@ -345,4 +345,19 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
 

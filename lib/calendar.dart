@@ -101,7 +101,7 @@ class _DynamicEventState extends State<DynamicEvent> {
                         borderRadius: BorderRadius.circular(10.0)),
                     child: Text(
                       date.day.toString(),
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     )),
                 todayDayBuilder: (context, date, events) => Container(
                     margin: const EdgeInsets.all(4.0),
@@ -111,7 +111,7 @@ class _DynamicEventState extends State<DynamicEvent> {
                         borderRadius: BorderRadius.circular(10.0)),
                     child: Text(
                       date.day.toString(),
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     )),
               ),
               calendarController: _controller,
@@ -128,7 +128,7 @@ class _DynamicEventState extends State<DynamicEvent> {
                 ),
                 child: Center(
                     child: Text(event,
-                      style: TextStyle(color: Colors.blue,
+                      style: const TextStyle(color: Colors.blue,
                           fontWeight: FontWeight.bold,fontSize: 16),)
                 ),
               ),
@@ -149,13 +149,13 @@ class _DynamicEventState extends State<DynamicEvent> {
         context: context,
         builder: (context) => AlertDialog(
           backgroundColor: Colors.white70,
-          title: Text("Add Events"),
+          title: const Text("Add Events"),
           content: TextField(
             controller: _eventController,
           ),
           actions: <Widget>[
-            FlatButton(
-              child: Text("Save",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
+            TextButton(
+              child: const Text("Save",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
               onPressed: () {
                 if (_eventController.text.isEmpty) return;
                 setState(() {
@@ -171,7 +171,6 @@ class _DynamicEventState extends State<DynamicEvent> {
                   _eventController.clear();
                   Navigator.pop(context);
                 });
-
               },
             )
           ],

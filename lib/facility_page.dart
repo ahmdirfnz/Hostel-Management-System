@@ -1,0 +1,116 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class FacilitiesPage extends StatefulWidget {
+  const FacilitiesPage({Key? key}) : super(key: key);
+
+  @override
+  _FacilitiesPageState createState() => _FacilitiesPageState();
+}
+
+class _FacilitiesPageState extends State<FacilitiesPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 30,),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          print("tapped");
+                        },
+                        child: SizedBox(
+                          child: Center(child: Text('Report Status')),
+                          width: 170.0,
+                          height: 120.0,
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          print("tapped");
+                        },
+                        child: const SizedBox(
+                          child: Center(child: Text('Office Hours')),
+                          width: 170.0,
+                          height: 120.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          print("tapped");
+                        },
+                        child: const SizedBox(
+                          child: Center(child: Text('Bus Schedule')),
+                          width: 170.0,
+                          height: 120.0,
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          print("tapped");
+                        },
+                        child: const SizedBox(
+                          child: Center(child: Text('Bus')),
+                          width: 170.0,
+                          height: 120.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          print("tapped");
+                        },
+                        child: const SizedBox(
+                          child: Center(child: Text('Bus')),
+                          width: 170.0,
+                          height: 120.0,
+                        ),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.redAccent,
+                      child: InkWell(
+                        onTap: () {
+                          print("tapped");
+                        },
+                        child: const SizedBox(
+                          child: Center(child: Text('Emergency', style: TextStyle(color: Colors.white),)),
+                          width: 170.0,
+                          height: 120.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

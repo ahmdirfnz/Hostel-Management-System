@@ -1,3 +1,5 @@
+import 'package:code/facility_page.dart';
+import 'package:code/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -17,14 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget> [
     HomePage(),
-    Text(
-      'News',
-      style: optionStyle,
-    ),
-    Text(
-      'Profile',
-      style: optionStyle,
-    ),
+    FacilitiesPage(),
+    ProfilePage(),
   ];
 
   void initState() {
@@ -109,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pages),
-            label: 'News',
+            label: 'Facility',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -179,7 +175,8 @@ class _HomePageState extends State<HomePage> {
                   height: 130,
                   width: 260,
                   child: Center(child: Text(flavor)),
-                ),Container(
+                ),
+                Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.blueAccent,
@@ -346,18 +343,5 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
-
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 
 

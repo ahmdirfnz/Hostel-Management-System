@@ -52,6 +52,21 @@ class _MyRegisterState extends State<MyRegister> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  bool _disableButton() {
+    return fullNameController.text.isEmpty ||
+           usernameController.text.isEmpty ||
+           matricNumberController.text.isEmpty ||
+           phoneNumberController.text.isEmpty ||
+           emailController.text.isEmpty ||
+           passwordController.text.isEmpty;
+  }
+
+  void _updateButton() {
+    setState(() {
+      _disableButton();
+    });
+  }
+
   Future createUser(StudentUser user) async {
 
     final docUser = FirebaseFirestore.instance.collection('student').doc(user.matricNumber);
@@ -85,16 +100,22 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
+                  onChanged: (value) {
+                    _updateButton();
+                  },
                   controller: fullNameController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                       labelText: 'Full Name',
                       prefixIcon: Icon(Icons.person),
-                      suffixIcon: Icon(
-                        Icons.delete_outline,
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.delete),
                         color: Colors.red,
+                        onPressed: () {
+                          fullNameController.clear();
+                        },
                       ),
                       hintText: "Enter Your Full Name",
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         borderSide: BorderSide(color: Colors.black, width: 2.0),
                       )),
@@ -103,16 +124,22 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
+                  onChanged: (value) {
+                    _updateButton();
+                  },
                   controller: usernameController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                       labelText: 'Username',
                       prefixIcon: Icon(Icons.person),
-                      suffixIcon: Icon(
-                        Icons.delete_outline,
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.delete),
                         color: Colors.red,
+                        onPressed: () {
+                          usernameController.clear();
+                        },
                       ),
                       hintText: "Enter Username",
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         borderSide: BorderSide(color: Colors.black, width: 2.0),
                       )),
@@ -121,21 +148,27 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  onChanged: (value) {
+                    _updateButton();
+                  },
                 controller: matricNumberController,
                   keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Matric Number',
                     hintText: 'Enter Your Matric Number',
-                    prefixIcon: Icon(Icons.school),
-                    suffixIcon: Icon(
-                      Icons.delete_outline,
+                    prefixIcon: const Icon(Icons.school),
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.delete),
                       color: Colors.red,
+                      onPressed: () {
+                        matricNumberController.clear();
+                      },
                     ),
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       borderSide: BorderSide(color: Colors.black, width: 2.0),
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       borderSide: BorderSide(color: Colors.blue, width: 2.0),
                     ),
@@ -145,21 +178,27 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  onChanged: (value) {
+                    _updateButton();
+                  },
                   controller: phoneNumberController,
                   keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Mobile Number',
                     hintText: 'Enter Mobile Number',
-                    prefixIcon: Icon(Icons.phone),
-                    suffixIcon: Icon(
-                      Icons.delete_outline,
+                    prefixIcon: const Icon(Icons.phone),
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.delete),
                       color: Colors.red,
+                      onPressed: () {
+                        phoneNumberController.clear();
+                      },
                     ),
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       borderSide: BorderSide(color: Colors.black, width: 2.0),
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       borderSide: BorderSide(color: Colors.blue, width: 2.0),
                     ),
@@ -169,21 +208,27 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  onChanged: (value) {
+                    _updateButton();
+                  },
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Email',
                     hintText: 'Enter Your Email',
-                    prefixIcon: Icon(Icons.email),
-                    suffixIcon: Icon(
-                      Icons.delete_outline,
+                    prefixIcon: const Icon(Icons.email),
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.delete),
                       color: Colors.red,
+                      onPressed: () {
+                        emailController.clear();
+                      },
                     ),
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       borderSide: BorderSide(color: Colors.black, width: 2.0),
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       borderSide: BorderSide(color: Colors.blue, width: 2.0),
                     ),
@@ -193,6 +238,9 @@ class _MyRegisterState extends State<MyRegister> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  onChanged: (value) {
+                    _updateButton();
+                  },
                   controller: passwordController,
                   obscureText: _isObscure,
                   keyboardType: TextInputType.visiblePassword,
@@ -225,7 +273,7 @@ class _MyRegisterState extends State<MyRegister> {
           ),
         ),
       ),
-      floatingActionButton: showFab ? FloatingActionButton(
+      floatingActionButton: _disableButton() ? null : showFab ? FloatingActionButton(
         onPressed: () {
             final user = StudentUser (
             fullName: fullNameController.text,
@@ -238,11 +286,8 @@ class _MyRegisterState extends State<MyRegister> {
       );
 
           createUser(user);
-            setState(() {
 
-              Navigator.pushNamed(context, "room_screen");
-            });
-            Navigator.push(context, MaterialPageRoute(builder: (context) => BookingRoom(matricNumber: matricNumberController.text,)));
+          _disableButton() ? null : Navigator.push(context, MaterialPageRoute(builder: (context) => BookingRoom(matricNumber: matricNumberController.text,)));
 
 
         },
@@ -270,6 +315,16 @@ class _BookingRoomState extends State<BookingRoom> {
   bool _flagB = true;
   bool _flagC = true;
   bool _flagD = true;
+
+  bool _disableButton() {
+    return _flagA && _flagB && _flagC && _flagD;
+  }
+
+  void _updateButton() {
+    setState(() {
+      _disableButton();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -299,6 +354,7 @@ class _BookingRoomState extends State<BookingRoom> {
                               _flagC = true;
                               _flagD = true;
                             }
+                            _disableButton();
 
                           });
                           _flagA ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'SJ-J-3-08-A'});
@@ -315,6 +371,7 @@ class _BookingRoomState extends State<BookingRoom> {
                             _flagA = true;
                             _flagD = true;
                           }
+                          _disableButton();
                         });
                         _flagC ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'SJ-J-3-08-C'});
                       },
@@ -335,6 +392,7 @@ class _BookingRoomState extends State<BookingRoom> {
                             _flagC = true;
                             _flagD = true;
                           }
+                          _disableButton();
                         });
                         // FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room B'});
                         _flagB ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'SJ-J-3-08-B'});
@@ -351,6 +409,7 @@ class _BookingRoomState extends State<BookingRoom> {
                             _flagC = true;
                             _flagA = true;
                           }
+                          _disableButton();
                         });
                         _flagD ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'SJ-J-3-08-D'});
 
@@ -365,7 +424,7 @@ class _BookingRoomState extends State<BookingRoom> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: _disableButton() ? null : FloatingActionButton(
         onPressed: () => setState(() {
           Navigator.pushNamed(context, 'info_screen');
           Navigator.push(context, MaterialPageRoute(builder: (context) => InfoPage(matricNumber: widget.matricNumber,)));

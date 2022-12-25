@@ -27,7 +27,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   late StreamSubscription<User?> user;
+  @override
   void initState() {
+    super.initState();
     user = FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user == null) {
         print('User is currently is signed out!');

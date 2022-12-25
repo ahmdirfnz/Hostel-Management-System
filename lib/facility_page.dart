@@ -13,7 +13,7 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 30,),
+        const SizedBox(height: 30,),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
@@ -26,7 +26,7 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
                         onTap: () {
                           print("tapped");
                         },
-                        child: SizedBox(
+                        child: const SizedBox(
                           child: Center(child: Text('Report Status')),
                           width: 170.0,
                           height: 120.0,
@@ -34,12 +34,13 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
                       ),
                     ),
                     Card(
+                      color: Colors.green,
                       child: InkWell(
                         onTap: () {
                           print("tapped");
                         },
                         child: const SizedBox(
-                          child: Center(child: Text('Office Hours')),
+                          child: Center(child: Text('Office Hours', style: TextStyle(color: Colors.white),)),
                           width: 170.0,
                           height: 120.0,
                         ),
@@ -51,12 +52,13 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Card(
+                      color: Colors.blue,
                       child: InkWell(
                         onTap: () {
                           print("tapped");
                         },
                         child: const SizedBox(
-                          child: Center(child: Text('Bus Schedule')),
+                          child: Center(child: Text('Bus Schedule', style: TextStyle(color: Colors.white),)),
                           width: 170.0,
                           height: 120.0,
                         ),
@@ -92,7 +94,7 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
                       ),
                     ),
                     Card(
-                      color: Colors.redAccent,
+                      color: Colors.red,
                       child: InkWell(
                         onTap: () {
                           print("tapped");

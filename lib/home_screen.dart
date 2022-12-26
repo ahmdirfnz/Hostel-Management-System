@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code/facility_page.dart';
 import 'package:code/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -130,8 +131,31 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final Color flavorColor = Colors.blueAccent;
   final String flavor = 'NEWS';
+  
+  bool _checkStatus(String status_now) {
+    if (status_now == 'Accepted') {
+      return true;
+    }
+    return false;
+  }
+
+  Color _checkOfficeStatus(String status_office) {
+    if (status_office == "Open") {
+      return Colors.green;
+    } else if (status_office == "Break") {
+      return Colors.blueAccent;
+    } else if (status_office == "Close Soon") {
+      return Colors.orange;
+    }
+      return Colors.redAccent;
+  }
+  
   @override
   Widget build(BuildContext context) {
+
+    CollectionReference users = FirebaseFirestore.instance.collection('student complaint');
+    CollectionReference office_status = FirebaseFirestore.instance.collection('Office Status');
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -162,8 +186,8 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blueAccent,
                   ),
                   margin: const EdgeInsets.all(8),
-                  height: 130,
-                  width: 260,
+                  height: 150,
+                  width: 300,
                   child: Center(child: Text(flavor, style: TextStyle(color: Colors.white),)),
                 ),
                 Container(
@@ -172,8 +196,8 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blueAccent,
                   ),
                   margin: const EdgeInsets.all(8),
-                  height: 130,
-                  width: 260,
+                  height: 150,
+                  width: 300,
                   child: Center(child: Text(flavor)),
                 ),
                 Container(
@@ -182,8 +206,8 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blueAccent,
                   ),
                   margin: const EdgeInsets.all(8),
-                  height: 130,
-                  width: 260,
+                  height: 150,
+                  width: 300,
                   child: Center(child: Text(flavor)),
                 ),
                 Container(
@@ -192,8 +216,8 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blueAccent,
                   ),
                   margin: const EdgeInsets.all(8),
-                  height: 130,
-                  width: 260,
+                  height: 150,
+                  width: 300,
                   child: Center(child: Text(flavor)),
                 ),
                 Container(
@@ -244,99 +268,121 @@ class _HomePageState extends State<HomePage> {
           height: 15.0,
         ),
         Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Card(
-                      child: InkWell(
-                        onTap: () {
-                          print("tapped");
-                        },
-                        child: Container(
-                          child: Center(child: Text('Report Status')),
-                          width: 170.0,
-                          height: 120.0,
-                        ),
+          child:  SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          FutureBuilder(
+                            future: users.doc('B081910068').get(),
+                            builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                              if (snapshot.connectionState == ConnectionState.done) {
+                                Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+                                return Card(
+                                  color: _checkStatus(data['status']) ? Colors.green :Colors.red,
+                                  child: InkWell(
+                                    onTap: () {
+                                      print("tapped");
+                                    },
+                                    child: const SizedBox(
+                                      child: Center(child: Text('Report Status', style: TextStyle(color: Colors.white),)),
+                                      width: 170.0,
+                                      height: 120.0,
+                                    ),
+                                  ),
+                                );
+
+                              }
+                              return const Text('Loading...');
+                            },
+                          ),
+                          FutureBuilder(
+                            future: office_status.doc('status').get(),
+                            builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                              if (snapshot.connectionState == ConnectionState.done) {
+                                Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+                                return Card(
+                                  color: _checkOfficeStatus(data['status']),
+                                  child: InkWell(
+                                    onTap: () {
+                                      print("tapped");
+                                    },
+                                    child: const SizedBox(
+                                      child: Center(child: Text('Office Hours', style: TextStyle(color: Colors.white),)),
+                                      width: 170.0,
+                                      height: 120.0,
+                                    ),
+                                  ),
+                                );
+
+                              }
+                              return const Text('Loading...');
+                            },
+                          ),
+                        ],
                       ),
-                    ),
-                    Card(
-                      child: InkWell(
-                        onTap: () {
-                          print("tapped");
-                        },
-                        child: const SizedBox(
-                          child: Center(child: Text('Office Hours')),
-                          width: 170.0,
-                          height: 120.0,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Card(
+                            child: InkWell(
+                              onTap: () {
+                                print("tapped");
+                              },
+                              child: const SizedBox(
+                                child: Center(child: Text('Bus Schedule')),
+                                width: 170.0,
+                                height: 120.0,
+                              ),
+                            ),
+                          ),
+                          Card(
+                            child: InkWell(
+                              onTap: () {
+                                print("tapped");
+                              },
+                              child: const SizedBox(
+                                child: Center(child: Text('Bus')),
+                                width: 170.0,
+                                height: 120.0,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Card(
+                            child: InkWell(
+                              onTap: () {
+                                print("tapped");
+                              },
+                              child: const SizedBox(
+                                child: Center(child: Text('Bus')),
+                                width: 170.0,
+                                height: 120.0,
+                              ),
+                            ),
+                          ),
+                          Card(
+                            child: InkWell(
+                              onTap: () {
+                                print("tapped");
+                              },
+                              child: const SizedBox(
+                                child: Center(child: Text('Bus')),
+                                width: 170.0,
+                                height: 120.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Card(
-                      child: InkWell(
-                        onTap: () {
-                          print("tapped");
-                        },
-                        child: const SizedBox(
-                          child: Center(child: Text('Bus Schedule')),
-                          width: 170.0,
-                          height: 120.0,
-                        ),
-                      ),
-                    ),
-                    Card(
-                      child: InkWell(
-                        onTap: () {
-                          print("tapped");
-                        },
-                        child: const SizedBox(
-                          child: Center(child: Text('Bus')),
-                          width: 170.0,
-                          height: 120.0,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Card(
-                      child: InkWell(
-                        onTap: () {
-                          print("tapped");
-                        },
-                        child: const SizedBox(
-                          child: Center(child: Text('Bus')),
-                          width: 170.0,
-                          height: 120.0,
-                        ),
-                      ),
-                    ),
-                    Card(
-                      child: InkWell(
-                        onTap: () {
-                          print("tapped");
-                        },
-                        child: const SizedBox(
-                          child: Center(child: Text('Bus')),
-                          width: 170.0,
-                          height: 120.0,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
         ),
       ],
     );

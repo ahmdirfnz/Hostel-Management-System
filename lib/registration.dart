@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MyRegister extends StatefulWidget {
   const MyRegister({Key? key}) : super(key: key);
@@ -44,6 +45,8 @@ class StudentUser {
 class _MyRegisterState extends State<MyRegister> {
 
   bool _isObscure = true;
+
+  final _auth = FirebaseAuth.instance;
 
   final fullNameController = TextEditingController();
   final usernameController = TextEditingController();
@@ -274,7 +277,7 @@ class _MyRegisterState extends State<MyRegister> {
         ),
       ),
       floatingActionButton: _disableButton() ? null : showFab ? FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
             final user = StudentUser (
             fullName: fullNameController.text,
             userName: usernameController.text,
@@ -285,6 +288,12 @@ class _MyRegisterState extends State<MyRegister> {
             room: "",
       );
 
+            try {
+              await _auth.createUserWithEmailAndPassword(
+                  email: emailController.text, password: passwordController.text);
+            } catch (e) {
+              print(e);
+            }
           createUser(user);
 
           _disableButton() ? null : Navigator.push(context, MaterialPageRoute(builder: (context) => BookingRoom(matricNumber: matricNumberController.text,)));

@@ -22,12 +22,13 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Card(
+                      color: Colors.green,
                       child: InkWell(
                         onTap: () {
                           print("tapped");
                         },
                         child: const SizedBox(
-                          child: Center(child: Text('Report Status')),
+                          child: Center(child: Text('Report Status', style: TextStyle(color: Colors.white),)),
                           width: 170.0,
                           height: 120.0,
                         ),

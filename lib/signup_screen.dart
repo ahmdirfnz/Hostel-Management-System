@@ -27,7 +27,6 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-
   final _auth = FirebaseAuth.instance;
   late String email;
   late String password;
@@ -46,14 +45,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextField(
-                keyboardType: TextInputType.emailAddress,
-                textAlign: TextAlign.center,
-                onChanged: (value) {
-                  email = value;
-                },
-                decoration: kTextFieldDecoration.copyWith(
-                  hintText: 'Enter Your Email')),
-              const SizedBox(height: 24.0,
+                  keyboardType: TextInputType.emailAddress,
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    email = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: 'Enter Your Email')),
+              const SizedBox(
+                height: 24.0,
               ),
               TextField(
                   obscureText: true,
@@ -68,21 +68,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 24.0,
               ),
               TextButton(
-    onPressed: () async {
-      setState(() {
-        showSpinner = true;
-      });
-      try {
-        final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-        Navigator.pushNamed(context, 'home_screen');
-      } catch (e) {
-        print(e);
-      }
-      setState(() {
-        showSpinner = false;
-      });
-    }, 
-    child: const Text('Sign Up', style: TextStyle(fontSize: 20.0),))
+                  onPressed: () async {
+                    setState(() {
+                      showSpinner = true;
+                    });
+                    try {
+                      final newUser =
+                          await _auth.createUserWithEmailAndPassword(
+                              email: email, password: password);
+                      Navigator.pushNamed(context, 'home_screen');
+                    } catch (e) {
+                      print(e);
+                    }
+                    setState(() {
+                      showSpinner = false;
+                    });
+                  },
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(fontSize: 20.0),
+                  ))
             ],
           ),
         ),

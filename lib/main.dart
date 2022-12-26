@@ -5,6 +5,7 @@ import 'package:code/registration.dart';
 import 'package:code/report.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'welcome_screen.dart';
 import 'signup_screen.dart';
 import 'login_screen.dart';
@@ -25,11 +26,27 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  var _doneOnboarding = false;
+
+  void _checkShowOnboarding() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var doneOnboarding = (prefs.getBool('done_onboarding') ?? false);
+    setState(() {
+      _doneOnboarding = doneOnboarding;
+
+    });
+    await prefs.setBool('done_onboarding', true);
+    print(_doneOnboarding);
+  }
+
   // This widget is the root of your application.
   late StreamSubscription<User?> user;
   @override
   void initState() {
+
     super.initState();
+    _checkShowOnboarding();
     user = FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user == null) {
         print('User is currently is signed out!');
@@ -39,16 +56,16 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  @override
-  void dispose() {
-    user.cancel();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   user.cancel();
+  //   super.dispose();
+  // }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: FirebaseAuth.instance.currentUser == null ? 'welcome_screen' : 'home_screen',
+      // initialRoute: _doneOnboarding ? 'home_screen' : 'login_screen',
       routes: {
         'welcome_screen': (context) => const WelcomeScreen(),
         'signup_screen': (context) => const RegistrationScreen(),
@@ -60,54 +77,7 @@ class _MyAppState extends State<MyApp> {
         'calendar_screen': (context) => DynamicEvent(),
         'report screen': (context) => const ReportForm(),
       },
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      home: _doneOnboarding ? (FirebaseAuth.instance.currentUser == null ? LoginScreen() : HomeScreen()) : const MyRegister(),
     );
   }
 }

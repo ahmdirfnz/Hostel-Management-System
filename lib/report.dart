@@ -65,7 +65,7 @@ class _ReportFormState extends State<ReportForm> {
 
     // Upload Image to firebase
 
-    final path = 'files/${pickedFile!.name}';
+    final path = '${usercomplaint.matricNumber}/${pickedFile!.name}';
     final file = File(pickedFile!.path!);
 
     final ref = FirebaseStorage.instance.ref().child(path);
@@ -136,7 +136,7 @@ class _ReportFormState extends State<ReportForm> {
                             selectedValue = newValue!;
                           });
                         },
-                        items: <String>['Room', 'Bus', 'Toilet', 'Lift'].map<DropdownMenuItem<String>>((String value) {
+                        items: <String>['Room', 'Bus', 'Toilet', 'Lift', 'Food'].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(
@@ -192,6 +192,7 @@ class _ReportFormState extends State<ReportForm> {
                             complaint: complaintController.text,
                           );
                           createUser(userComplaint);
+                          Navigator.pushNamed(context, "home_screen");
 
                         },
                         child: const Text('Submit'),

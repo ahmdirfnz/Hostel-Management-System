@@ -66,12 +66,13 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
                       ),
                     ),
                     Card(
+                      color: Colors.deepPurpleAccent,
                       child: InkWell(
                         onTap: () {
                           print("tapped");
                         },
                         child: const SizedBox(
-                          child: Center(child: Text('Bus')),
+                          child: Center(child: Text('Timetable', style: TextStyle(color: Colors.white),)),
                           width: 170.0,
                           height: 120.0,
                         ),
@@ -83,12 +84,13 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Card(
+                      color: Colors.brown,
                       child: InkWell(
                         onTap: () {
                           print("tapped");
                         },
                         child: const SizedBox(
-                          child: Center(child: Text('Bus')),
+                          child: Center(child: Text('Cafe', style: TextStyle(color: Colors.white),)),
                           width: 170.0,
                           height: 120.0,
                         ),

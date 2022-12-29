@@ -14,11 +14,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   final _auth = FirebaseAuth.instance;
   int _selectedIndex = 0;
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget> [
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     FacilitiesPage(),
     ProfilePage(),
@@ -54,11 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
         leading: null,
         actions: [
           IconButton(
-              onPressed: () {
-                _auth.signOut();
-                Navigator.pushNamed(context, 'welcome_screen');
-              },
-              icon: const Icon(Icons.logout),
+            onPressed: () {
+              _auth.signOut();
+              Navigator.pushNamed(context, 'welcome_screen');
+            },
+            icon: const Icon(Icons.logout),
           ),
         ],
         title: const Text('Hostel Management'),
@@ -75,34 +75,44 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-                child: Text('Other Features'),
+              child: Text('Other Features'),
             ),
             ListTile(
+              leading: const Icon(Icons.app_registration),
               title: const Text('Registration Form'),
               onTap: () {
                 Navigator.pushNamed(context, 'registration_screen');
               },
             ),
             ListTile(
+              leading: const Icon(Icons.pages),
               title: const Text('Report Form'),
               onTap: () {
                 Navigator.pushNamed(context, 'report screen');
               },
             ),
             ListTile(
+              leading: const Icon(Icons.calendar_month),
               title: const Text('Calendar'),
               onTap: () {
                 Navigator.pushNamed(context, 'calendar_screen');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+
               },
             ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem> [
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pages),
@@ -131,7 +141,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final Color flavorColor = Colors.blueAccent;
   final String flavor = 'NEWS';
-  
+
+  // final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('Office Status').doc('status').snapshots() as Stream<QuerySnapshot<Object?>>;
+  Stream documentStream = FirebaseFirestore.instance.collection('Office Status').doc('status').snapshots();
+
   bool _checkStatus(String status_now) {
     if (status_now == 'Accepted') {
       return true;
@@ -147,14 +160,15 @@ class _HomePageState extends State<HomePage> {
     } else if (status_office == "Close Soon") {
       return Colors.orange;
     }
-      return Colors.redAccent;
+    return Colors.redAccent;
   }
-  
+
   @override
   Widget build(BuildContext context) {
-
-    CollectionReference users = FirebaseFirestore.instance.collection('student complaint');
-    CollectionReference office_status = FirebaseFirestore.instance.collection('Office Status');
+    CollectionReference users =
+        FirebaseFirestore.instance.collection('student complaint');
+    CollectionReference office_status =
+        FirebaseFirestore.instance.collection('Office Status');
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -163,13 +177,12 @@ class _HomePageState extends State<HomePage> {
           margin: const EdgeInsets.fromLTRB(14, 14, 14, 14),
           child: TextField(
             decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.search),
-              hintText: 'Search your building location',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(28),
-                borderSide: const BorderSide(color: Colors.blueAccent),
-              )
-            ),
+                prefixIcon: const Icon(Icons.search),
+                hintText: 'Search your building location',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(28),
+                  borderSide: const BorderSide(color: Colors.blueAccent),
+                )),
           ),
         ),
         const SizedBox(
@@ -180,6 +193,20 @@ class _HomePageState extends State<HomePage> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.blueAccent,
+                  ),
+                  margin: const EdgeInsets.all(8),
+                  height: 150,
+                  width: 300,
+                  child: Center(
+                      child: Text(
+                    flavor,
+                    style: const TextStyle(color: Colors.white),
+                  )),
+                ),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -250,16 +277,6 @@ class _HomePageState extends State<HomePage> {
                   width: 300,
                   child: Center(child: Text(flavor)),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blueAccent,
-                  ),
-                  margin: const EdgeInsets.all(8),
-                  height: 150,
-                  width: 300,
-                  child: Center(child: Text(flavor)),
-                ),
               ],
             ),
           ),
@@ -268,126 +285,163 @@ class _HomePageState extends State<HomePage> {
           height: 15.0,
         ),
         Expanded(
-          child:  SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FutureBuilder(
-                            future: users.doc('B081910068').get(),
-                            builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-                              if (snapshot.connectionState == ConnectionState.done) {
-                                Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-                                return Card(
-                                  color: _checkStatus(data['status']) ? Colors.green :Colors.red,
-                                  child: InkWell(
-                                    onTap: () {
-                                      print("tapped");
-                                    },
-                                    child: const SizedBox(
-                                      child: Center(child: Text('Report Status', style: TextStyle(color: Colors.white),)),
-                                      width: 170.0,
-                                      height: 120.0,
-                                    ),
-                                  ),
-                                );
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                        stream: FirebaseFirestore.instance.collection('student complaint').doc('B081910068').snapshots(),
+                        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
+                          if (snapshot.hasError) {
+                            return const Text('Something went wrong');
+                          }
 
-                              }
-                              return const Text('Loading...');
-                            },
-                          ),
-                          FutureBuilder(
-                            future: office_status.doc('status').get(),
-                            builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-                              if (snapshot.connectionState == ConnectionState.done) {
-                                Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-                                return Card(
-                                  color: _checkOfficeStatus(data['status']),
-                                  child: InkWell(
-                                    onTap: () {
-                                      print("tapped");
-                                    },
-                                    child: const SizedBox(
-                                      child: Center(child: Text('Office Hours', style: TextStyle(color: Colors.white),)),
-                                      width: 170.0,
-                                      height: 120.0,
-                                    ),
-                                  ),
-                                );
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const Text('Loading...');
+                          }
 
-                              }
-                              return const Text('Loading...');
-                            },
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Card(
+                          Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+                          return Card(
+                            color: _checkStatus(data['status']) ? Colors.green :Colors.red,
                             child: InkWell(
                               onTap: () {
                                 print("tapped");
                               },
                               child: const SizedBox(
-                                child: Center(child: Text('Bus Schedule')),
+                                child: Center(child: Text('Report Status', style: TextStyle(color: Colors.white),)),
                                 width: 170.0,
                                 height: 120.0,
                               ),
                             ),
-                          ),
-                          Card(
-                            child: InkWell(
-                              onTap: () {
-                                print("tapped");
-                              },
-                              child: const SizedBox(
-                                child: Center(child: Text('Bus')),
-                                width: 170.0,
-                                height: 120.0,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Card(
-                            child: InkWell(
-                              onTap: () {
-                                print("tapped");
-                              },
-                              child: const SizedBox(
-                                child: Center(child: Text('Bus')),
-                                width: 170.0,
-                                height: 120.0,
-                              ),
-                            ),
-                          ),
-                          Card(
-                            child: InkWell(
-                              onTap: () {
-                                print("tapped");
-                              },
-                              child: const SizedBox(
-                                child: Center(child: Text('Bus')),
-                                width: 170.0,
-                                height: 120.0,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                          );
+                        }
+                    ),
+                    StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                        stream: FirebaseFirestore.instance.collection('Office Status').doc('status').snapshots(),
+                        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
+                          if (snapshot.hasError) {
+                            return const Text('Something went wrong');
+                          }
+
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const Text('Loading...');
+                          }
+
+                            Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+                            return Card(
+                                        color: _checkOfficeStatus(data['status']),
+                                        child: InkWell(
+                                          onTap: () {
+                                            print("tapped");
+                                          },
+                                          child: const SizedBox(
+                                            child: Center(
+                                                child: Text(
+                                              'Office Hours',
+                                              style: TextStyle(color: Colors.white),
+                                            )),
+                                            width: 170.0,
+                                            height: 120.0,
+                                          ),
+                                        ),
+                                      );
+                        }
+                    ),
+                    // FutureBuilder(
+                    //   future: office_status.doc('status').get(),
+                    //   builder: (BuildContext context,
+                    //       AsyncSnapshot<DocumentSnapshot> snapshot) {
+                    //     if (snapshot.connectionState == ConnectionState.done) {
+                    //       Map<String, dynamic> data =
+                    //           snapshot.data!.data() as Map<String, dynamic>;
+                    //       return Card(
+                    //         color: _checkOfficeStatus(data['status']),
+                    //         child: InkWell(
+                    //           onTap: () {
+                    //             print("tapped");
+                    //           },
+                    //           child: const SizedBox(
+                    //             child: Center(
+                    //                 child: Text(
+                    //               'Office Hours',
+                    //               style: TextStyle(color: Colors.white),
+                    //             )),
+                    //             width: 170.0,
+                    //             height: 120.0,
+                    //           ),
+                    //         ),
+                    //       );
+                    //     }
+                    //     return const Text('Loading...');
+                    //   },
+                    // ),
+                  ],
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          print("tapped");
+                        },
+                        child: const SizedBox(
+                          child: Center(child: Text('Bus Schedule')),
+                          width: 170.0,
+                          height: 120.0,
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          print("tapped");
+                        },
+                        child: const SizedBox(
+                          child: Center(child: Text('Bus')),
+                          width: 170.0,
+                          height: 120.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          print("tapped");
+                        },
+                        child: const SizedBox(
+                          child: Center(child: Text('Timetable')),
+                          width: 170.0,
+                          height: 120.0,
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          print("tapped");
+                        },
+                        child: const SizedBox(
+                          child: Center(child: Text('Bus')),
+                          width: 170.0,
+                          height: 120.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );
   }
 }
-
-
-

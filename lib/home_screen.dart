@@ -51,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        centerTitle: true,
         leading: null,
         actions: [
           IconButton(
@@ -75,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Text('Other Features'),
+              child: Text('Other Features', style: TextStyle(color: Colors.white),),
             ),
             ListTile(
               leading: const Icon(Icons.app_registration),
@@ -142,7 +143,6 @@ class _HomePageState extends State<HomePage> {
   final Color flavorColor = Colors.blueAccent;
   final String flavor = 'NEWS';
 
-  // final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('Office Status').doc('status').snapshots() as Stream<QuerySnapshot<Object?>>;
   Stream documentStream = FirebaseFirestore.instance.collection('Office Status').doc('status').snapshots();
 
   bool _checkStatus(String status_now) {
@@ -295,11 +295,11 @@ class _HomePageState extends State<HomePage> {
                         stream: FirebaseFirestore.instance.collection('student complaint').doc('B081910068').snapshots(),
                         builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
                           if (snapshot.hasError) {
-                            return const Text('Something went wrong');
+                            return const Center(child: Text('Something went wrong'));
                           }
 
                           if (snapshot.connectionState == ConnectionState.waiting) {
-                            return const Text('Loading...');
+                            return const Center(child: Text('Loading...'));
                           }
 
                           Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
@@ -349,58 +349,32 @@ class _HomePageState extends State<HomePage> {
                                       );
                         }
                     ),
-                    // FutureBuilder(
-                    //   future: office_status.doc('status').get(),
-                    //   builder: (BuildContext context,
-                    //       AsyncSnapshot<DocumentSnapshot> snapshot) {
-                    //     if (snapshot.connectionState == ConnectionState.done) {
-                    //       Map<String, dynamic> data =
-                    //           snapshot.data!.data() as Map<String, dynamic>;
-                    //       return Card(
-                    //         color: _checkOfficeStatus(data['status']),
-                    //         child: InkWell(
-                    //           onTap: () {
-                    //             print("tapped");
-                    //           },
-                    //           child: const SizedBox(
-                    //             child: Center(
-                    //                 child: Text(
-                    //               'Office Hours',
-                    //               style: TextStyle(color: Colors.white),
-                    //             )),
-                    //             width: 170.0,
-                    //             height: 120.0,
-                    //           ),
-                    //         ),
-                    //       );
-                    //     }
-                    //     return const Text('Loading...');
-                    //   },
-                    // ),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Card(
+                      color: Colors.blue,
                       child: InkWell(
                         onTap: () {
                           print("tapped");
                         },
                         child: const SizedBox(
-                          child: Center(child: Text('Bus Schedule')),
+                          child: Center(child: Text('Bus Schedule', style: TextStyle(color: Colors.white),)),
                           width: 170.0,
                           height: 120.0,
                         ),
                       ),
                     ),
                     Card(
+                      color: Colors.brown,
                       child: InkWell(
                         onTap: () {
                           print("tapped");
                         },
                         child: const SizedBox(
-                          child: Center(child: Text('Bus')),
+                          child: Center(child: Text('Cafe', style: TextStyle(color: Colors.white),)),
                           width: 170.0,
                           height: 120.0,
                         ),

@@ -84,6 +84,7 @@ class _ReportFormState extends State<ReportForm> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Report Form',
       home: Scaffold(
         resizeToAvoidBottomInset: false,

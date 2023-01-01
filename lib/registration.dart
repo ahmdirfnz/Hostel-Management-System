@@ -1,3 +1,4 @@
+import 'package:code/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -72,7 +73,7 @@ class _MyRegisterState extends State<MyRegister> {
 
   Future createUser(StudentUser user) async {
 
-    final docUser = FirebaseFirestore.instance.collection('student').doc(user.matricNumber);
+    final docUser = FirebaseFirestore.instance.collection('student').doc(user.email);
 
     // final CollectionReference postRef = FirebaseFirestore.instance.collection('student');
 
@@ -296,7 +297,7 @@ class _MyRegisterState extends State<MyRegister> {
             }
           createUser(user);
 
-          _disableButton() ? null : Navigator.push(context, MaterialPageRoute(builder: (context) => BookingRoom(matricNumber: matricNumberController.text,)));
+          _disableButton() ? null : Navigator.push(context, MaterialPageRoute(builder: (context) => BookingRoom(email: emailController.text,)));
 
 
         },
@@ -310,9 +311,9 @@ class _MyRegisterState extends State<MyRegister> {
 
 
 class BookingRoom extends StatefulWidget {
-  const BookingRoom({Key? key, required this.matricNumber}) : super(key: key);
+  const BookingRoom({Key? key, required this.email}) : super(key: key);
 
-  final String matricNumber;
+  final String email;
 
   @override
   _BookingRoomState createState() => _BookingRoomState();
@@ -366,7 +367,7 @@ class _BookingRoomState extends State<BookingRoom> {
                             _disableButton();
 
                           });
-                          _flagA ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'SJ-J-3-08-A'});
+                          _flagA ? FirebaseFirestore.instance.collection('student').doc(widget.email).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.email).update({'room': 'SJ-J-3-08-A'});
                         },
                       style: TextButton.styleFrom(backgroundColor: _flagA ? Colors.green : Colors.red),
                         child: const Text('SJ-J-3-08-A', style: TextStyle(color: Colors.white),),
@@ -382,7 +383,7 @@ class _BookingRoomState extends State<BookingRoom> {
                           }
                           _disableButton();
                         });
-                        _flagC ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'SJ-J-3-08-C'});
+                        _flagC ? FirebaseFirestore.instance.collection('student').doc(widget.email).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.email).update({'room': 'SJ-J-3-08-C'});
                       },
                       style: TextButton.styleFrom(backgroundColor: _flagC ? Colors.green : Colors.red),
                       child: const Text('SJ-J-3-08-C', style: TextStyle(color: Colors.white),),
@@ -404,7 +405,7 @@ class _BookingRoomState extends State<BookingRoom> {
                           _disableButton();
                         });
                         // FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'Room B'});
-                        _flagB ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'SJ-J-3-08-B'});
+                        _flagB ? FirebaseFirestore.instance.collection('student').doc(widget.email).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.email).update({'room': 'SJ-J-3-08-B'});
                       },
                       style: TextButton.styleFrom(backgroundColor: _flagB ? Colors.green : Colors.red),
                       child: const Text('SJ-J-3-08-B', style: TextStyle(color: Colors.white),),
@@ -420,7 +421,7 @@ class _BookingRoomState extends State<BookingRoom> {
                           }
                           _disableButton();
                         });
-                        _flagD ? FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.matricNumber).update({'room': 'SJ-J-3-08-D'});
+                        _flagD ? FirebaseFirestore.instance.collection('student').doc(widget.email).update({'room': ''}) : FirebaseFirestore.instance.collection('student').doc(widget.email).update({'room': 'SJ-J-3-08-D'});
 
                       },
                       style: TextButton.styleFrom(backgroundColor: _flagD ? Colors.green : Colors.red),
@@ -435,8 +436,7 @@ class _BookingRoomState extends State<BookingRoom> {
       ),
       floatingActionButton: _disableButton() ? null : FloatingActionButton(
         onPressed: () => setState(() {
-          Navigator.pushNamed(context, 'info_screen');
-          Navigator.push(context, MaterialPageRoute(builder: (context) => InfoPage(matricNumber: widget.matricNumber,)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => InfoPage(email: widget.email,)));
         }),
         tooltip: 'Next Page',
         child: const Icon(Icons.navigate_next),
@@ -446,9 +446,9 @@ class _BookingRoomState extends State<BookingRoom> {
 }
 
 class InfoPage extends StatefulWidget {
-  const InfoPage({Key? key, required this.matricNumber}) : super(key: key);
+  const InfoPage({Key? key, required this.email}) : super(key: key);
 
-  final String matricNumber;
+  final String email;
 
   @override
   _InfoPageState createState() => _InfoPageState();
@@ -461,7 +461,7 @@ class _InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
-      future: users.doc(widget.matricNumber).get(),
+      future: users.doc(widget.email).get(),
         builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if(snapshot.connectionState == ConnectionState.done) {
 

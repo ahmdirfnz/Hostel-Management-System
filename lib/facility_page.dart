@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FacilitiesPage extends StatefulWidget {
@@ -59,7 +58,7 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
                           print("tapped");
                         },
                         child: const SizedBox(
-                          child: Center(child: Text('Bus Schedule', style: TextStyle(color: Colors.white),)),
+                          child: Center(child: Text('Permohonan\nSticker Kenderaan', style: TextStyle(color: Colors.white),)),
                           width: 170.0,
                           height: 120.0,
                         ),
@@ -90,7 +89,7 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
                           print("tapped");
                         },
                         child: const SizedBox(
-                          child: Center(child: Text('Cafe', style: TextStyle(color: Colors.white),)),
+                          child: Center(child: Text('Permohonan \nTinggal Luar', style: TextStyle(color: Colors.white),)),
                           width: 170.0,
                           height: 120.0,
                         ),

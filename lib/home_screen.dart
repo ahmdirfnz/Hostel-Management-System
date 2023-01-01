@@ -26,10 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void initState() {
     super.initState();
-    getCurrentUser();
+    _getCurrentUser();
   }
 
-  void getCurrentUser() async {
+  void _getCurrentUser() async {
     try {
       final user = await _auth.currentUser;
       if (user != null) {

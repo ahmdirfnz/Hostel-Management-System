@@ -6,6 +6,8 @@ import 'package:code/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'model/firebaseDatabaseImage.dart';
+
 late User loggedinUser;
 
 class HomeScreen extends StatefulWidget {
@@ -88,10 +90,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
               ),
                 accountEmail: Text('${_auth.currentUser?.email}'),
-              currentAccountPicture: const CircleAvatar(
-                radius: 40.0,
-                backgroundColor: Colors.white,
-                backgroundImage: AssetImage('assets/images/zorro.jpeg'),
+              currentAccountPicture: FutureBuilder(
+                  future: FireStoreDataBaseImage('zorro.jpeg').getData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return const Text('Something went wrong');
+                    }
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return CircleAvatar(
+                        radius: 40.0,
+                        backgroundColor: Colors.white,
+                        backgroundImage: NetworkImage(snapshot.data.toString()),
+                      );
+                    }
+                    return const Center(child: CircularProgressIndicator(),);
+                  }
               ),
             ),
             ListTile(
@@ -211,16 +224,20 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Container(
                   decoration: BoxDecoration(
+                    image: DecorationImage(
+                    image: NetworkImage("https://www.shutterstock.com/image-photo/key-moving-house-real-estate-260nw-283502801.jpg"),
+                      fit: BoxFit.cover
+                    ),
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.blueAccent,
                   ),
-                  margin: const EdgeInsets.all(8),
+                  margin: const EdgeInsets.only(left: 8.0),
                   height: 150,
                   width: 300,
                   child: Center(
                       child: Text(
-                    flavor,
-                    style: const TextStyle(color: Colors.white),
+                    'Pemulangan Kunci',
+                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                   )),
                 ),
                 Container(

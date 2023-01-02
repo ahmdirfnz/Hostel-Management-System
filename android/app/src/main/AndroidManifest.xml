@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.code">
+    package="com.hostman.code">
 
    <application
-        android:label="code"
+        android:label="HostMan"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

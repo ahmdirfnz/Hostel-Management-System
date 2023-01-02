@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:561197505960:android:ddee58607e29752003d19d",
         "android_client_info": {
-          "package_name": "com.example.code"
+          "package_name": "com.hostman.code"
         }
       },
       "oauth_client": [
@@ -35,7 +35,7 @@
               "client_id": "561197505960-3u35nfjh6vip6c67f1jo9nbcof3jdle9.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.code"
+                "bundle_id": "com.hostman.code"
               }
             }
           ]

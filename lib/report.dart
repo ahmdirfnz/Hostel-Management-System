@@ -3,6 +3,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+// late User loggedinUser;
 
 class ReportForm extends StatefulWidget {
   const ReportForm({Key? key}) : super(key: key);
@@ -38,6 +41,7 @@ class UserComplaint {
 class _ReportFormState extends State<ReportForm> {
 
   final _formKey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
 
   PlatformFile? pickedFile;
   UploadTask? uploadTask;
@@ -47,25 +51,49 @@ class _ReportFormState extends State<ReportForm> {
   final complaintController = TextEditingController();
 
   String selectedValue = 'Room';
+  bool haveUpload = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentUser();
+  }
 
   Future selectImage() async {
     final result = await FilePicker.platform.pickFiles();
-    if (result == null) return;
+    if (result == null) {
+      return;
+    } else {
+      haveUpload = true;
+    }
 
     setState(() {
       pickedFile = result.files.first;
     });
   }
 
+  void _getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser;
+      if (user != null) {
+        // loggedinUser = user;
+      }
+      print(_auth.currentUser?.email);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+
   Future createUser(UserComplaint usercomplaint) async {
-    final docUserComplaint = FirebaseFirestore.instance.collection('student complaint').doc(usercomplaint.matricNumber);
+    final docUserComplaint = FirebaseFirestore.instance.collection('student complaint').doc(_auth.currentUser?.email.toString());
 
     final json = usercomplaint.toJson();
     await docUserComplaint.set(json);
 
     // Upload Image to firebase
 
-    final path = '${usercomplaint.matricNumber}/${pickedFile!.name}';
+    final path = '${_auth.currentUser?.email.toString()}/${pickedFile!.name}';
     final file = File(pickedFile!.path!);
 
     final ref = FirebaseStorage.instance.ref().child(path);
@@ -178,6 +206,9 @@ class _ReportFormState extends State<ReportForm> {
                         height: 15.0,
                       ),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: haveUpload ? Colors.green : Colors.redAccent,
+                        ),
                           onPressed: selectImage,
                         child: const Text('Upload Image', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                       ),

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code/facility_page.dart';
 import 'package:code/profile_page.dart';
@@ -15,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _auth = FirebaseAuth.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('student');
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -72,11 +75,24 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
+            UserAccountsDrawerHeader(
+                accountName: FutureBuilder<DocumentSnapshot>(
+                  future: users.doc(_auth.currentUser?.email).get(),
+                  builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+                      return Text('${data['userName']}', style: const TextStyle(fontWeight: FontWeight.bold),);
+                    }
+                    return const Text('Loading...');
+                  },
+
               ),
-              child: Text('Other Features', style: TextStyle(color: Colors.white),),
+                accountEmail: Text('${_auth.currentUser?.email}'),
+              currentAccountPicture: const CircleAvatar(
+                radius: 40.0,
+                backgroundColor: Colors.white,
+                backgroundImage: AssetImage('assets/images/zorro.jpeg'),
+              ),
             ),
             ListTile(
               leading: const Icon(Icons.app_registration),

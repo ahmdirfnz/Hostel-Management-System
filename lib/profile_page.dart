@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:code/screens/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -28,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
       if (user != null) {
         loggedinUser = user;
       }
-      print(_auth.currentUser?.uid);
+      print(_auth.currentUser?.email);
     } catch (e) {
       print(e);
     }
@@ -51,14 +52,27 @@ class _ProfilePageState extends State<ProfilePage> {
                   backgroundImage: AssetImage('assets/images/zorro.jpeg'),
                 ),
                 const SizedBox(height: 5,),
-                Text('@${data['userName']}'),
-                const SizedBox(height: 20,),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('@${data['userName']}'),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfilePage()));
+                        },
+                        icon: Icon(Icons.edit),
+                      )
+                    ],
+                  ),
+                ),
+                // const SizedBox(height: 5,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(
-                          top: 3, right: 10, left: 32),
+                      padding: const EdgeInsets.only(right: 10, left: 32),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [

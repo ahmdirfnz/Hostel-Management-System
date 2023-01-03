@@ -1,0 +1,72 @@
+[
+  {
+    "keyword": "BK 19",
+    "name": "Bilik Kuliah 19",
+    "location": "Aras 5, FKM"
+  },
+  {
+    "keyword": "BK 21",
+    "name": "Bilik Kuliah 21",
+    "location": "Aras 5, FKM"
+  },
+  {
+    "keyword": "BK 25",
+    "name": "Bilik Kuliah 25",
+    "location": "Aras 8, FKM"
+  },
+  {
+    "keyword": "BK 27",
+    "name": "Bilik Kuliah 27",
+    "location": "Aras 8, FKM"
+  },
+  {
+    "keyword": "BK 28",
+    "name": "Bilik Kuliah 28",
+    "location": "Aras 8, FKM"
+  },
+  {
+    "keyword": "BK 33",
+    "name": "Bilik Kuliah 33",
+    "location": "Aras 3, FTK"
+  },
+  {
+    "keyword": "BK 41",
+    "name": "Bilik Kuliah 41",
+    "location": "Factory 4, FTK"
+  },
+  {
+    "keyword": "BT 2, F4",
+    "name": "Bilik Tutorial 2",
+    "location": "Factory 4, FTK"
+  },
+  {
+    "keyword": "CLeAR, FTK",
+    "name": "Collaborative Learning Room (CLeAR)",
+    "location": "Aras 3, FTK"
+  },
+  {
+    "keyword": "M. ANTENA",
+    "name": "Makmal Antena",
+    "location": "Factory 1, FTK"
+  },
+  {
+    "keyword": "MGM",
+    "name": "Makmal Gelombang Mikro",
+    "location": "Factory 1, FTK"
+  },
+  {
+    "keyword": "MKTWST",
+    "name": "Makmal Komunikasi Tanpa Wayar dan Sistem Terbenam",
+    "location": "Factory 2, FTK"
+  },
+  {
+    "keyword": "MPK 2",
+    "name": "Makmal Pengaturcaraan Komputer 2",
+    "location": "Factory 1, FTK"
+  },
+  {
+    "keyword": "SCL 4, F2",
+    "name": "Bilik SCL 4, Factory 2",
+    "location": "Factory 2, FTK"
+  }
+]

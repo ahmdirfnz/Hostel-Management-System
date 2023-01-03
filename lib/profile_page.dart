@@ -96,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(right: 10, left: 32),
+                          padding: const EdgeInsets.only(left: 10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
@@ -112,8 +112,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             ],
                           ),
                         ),
+                        const SizedBox(
+                          width: 10.0,
+                        ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 16),
+                          padding: const EdgeInsets.only(top: 32),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -125,8 +128,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               const SizedBox(height: 10,),
                               Text('${data['email']}'),
                               const SizedBox(height: 10,),
-                              const Text(
-                                  '329-I, Jalan Teratai 1, Taman Bunga\nRaya, Bukit Beruang, 75450, Melaka'),
+                              Text(
+                                  '${data['room']},Kolej Kediaman Satria Jebat,\nJalan Hang Tuah Jaya,\n76100 Durian Tunggal, Melaka'
+                              ),
                             ],
                           ),
                         )

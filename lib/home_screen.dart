@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code/facility_page.dart';
 import 'package:code/profile_page.dart';
+import 'package:code/screens/news_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -222,33 +223,51 @@ class _HomePageState extends State<HomePage> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                    image: NetworkImage("https://www.shutterstock.com/image-photo/key-moving-house-real-estate-260nw-283502801.jpg"),
-                      fit: BoxFit.cover
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => NewsPage()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: const DecorationImage(
+                      image: NetworkImage("https://www.shutterstock.com/image-photo/key-moving-house-real-estate-260nw-283502801.jpg"),
+                        fit: BoxFit.cover
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blueAccent,
                     ),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blueAccent,
+                    margin: const EdgeInsets.only(left: 8.0),
+                    height: 150,
+                    width: 300,
+                    child: const Center(
+                        child: Text(
+                      'Pemulangan Kunci',
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    )),
                   ),
-                  margin: const EdgeInsets.only(left: 8.0),
-                  height: 150,
-                  width: 300,
-                  child: Center(
-                      child: Text(
-                    'Pemulangan Kunci',
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                  )),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blueAccent,
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => NewsPage()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: const DecorationImage(
+                          image: NetworkImage("https://pbs.twimg.com/media/DMyo2RDUEAAeb0X.jpg"),
+                          fit: BoxFit.cover
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blueAccent,
+                    ),
+                    margin: const EdgeInsets.only(left: 8.0),
+                    height: 150,
+                    width: 300,
+                    child: const Center(
+                        child: Text(
+                          'Jadual Terbaru Bas',
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        )),
                   ),
-                  margin: const EdgeInsets.all(8),
-                  height: 150,
-                  width: 300,
-                  child: Center(child: Text(flavor, style: TextStyle(color: Colors.white),)),
                 ),
                 Container(
                   decoration: BoxDecoration(

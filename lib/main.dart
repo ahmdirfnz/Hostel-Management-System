@@ -65,7 +65,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // initialRoute: _doneOnboarding ? 'home_screen' : 'login_screen',
       routes: {
         'welcome_screen': (context) => const WelcomeScreen(),
         'signup_screen': (context) => const RegistrationScreen(),

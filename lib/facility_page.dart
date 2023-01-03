@@ -21,13 +21,13 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Card(
-                      color: Colors.green,
+                      color: Colors.deepOrange,
                       child: InkWell(
                         onTap: () {
                           print("tapped");
                         },
                         child: const SizedBox(
-                          child: Center(child: Text('Report Status', style: TextStyle(color: Colors.white),)),
+                          child: Center(child: Text('Jadual Pusat Sukan', style: TextStyle(color: Colors.white),)),
                           width: 170.0,
                           height: 120.0,
                         ),
@@ -40,7 +40,7 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
                           print("tapped");
                         },
                         child: const SizedBox(
-                          child: Center(child: Text('Office Hours', style: TextStyle(color: Colors.white),)),
+                          child: Center(child: Text('Perpustakaan', style: TextStyle(color: Colors.white),)),
                           width: 170.0,
                           height: 120.0,
                         ),
